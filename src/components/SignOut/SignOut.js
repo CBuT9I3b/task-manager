@@ -1,11 +1,13 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 import { withFirebase } from '../../services'
 
 const SignOut = ({ firebase }) => (
-  <button type='button' onClick={firebase.signOut}>
-    Sign Out
-  </button>
+  <NavLink
+    to='/'
+    onClick={firebase.signOut}
+  >Sign Out</NavLink>
 );
 
 export default withFirebase(SignOut)

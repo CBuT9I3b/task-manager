@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import { rootReducer } from '../reducers'
 
-const loggerMiddlewsre = createLogger();
+const loggerMiddleware = createLogger();
 
 export const configureStore = preloadedState => (
   createStore(
@@ -12,7 +12,7 @@ export const configureStore = preloadedState => (
     preloadedState,
     applyMiddleware(
       thunkMiddleware,
-      loggerMiddlewsre
+      loggerMiddleware
     )
   )
 );

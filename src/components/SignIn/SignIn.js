@@ -21,8 +21,7 @@ class SignIn extends Component {
   };
 
   onSubmit = event => {
-    event.preventDefault();
-    let { email, password } = this.state;
+    const { email, password } = this.state;
     this.props.firebase.signIn(email, password)
       .then(() => {
         this.setState({...INITIAL_STATE});
@@ -30,7 +29,8 @@ class SignIn extends Component {
       })
       .catch(error => {
         this.setState({error: error.message})
-      })
+      });
+    event.preventDefault()
   };
 
   render() {
@@ -40,33 +40,45 @@ class SignIn extends Component {
       password === '';
 
     return (
-      <form>
-        <h3>Sign In</h3>
-        <input
-          onChange={this.onChange}
-          name='email'
-          value={email}
-          id='email'
-          type='email'
-        />
-        <label htmlFor='email'>Email</label>
-        <input
-          onChange={this.onChange}
-          name='password'
-          value={password}
-          id='password'
-          type='password'
-        />
-        <label htmlFor='password'>Password</label>
-        <p>{error}</p>
-        <button
-          onClick={this.onSubmit}
-          disabled={isInvalid}
-        >Login</button>
-        <p>
-          Don't have an account? <Link to='/sign_up'>Sign Up</Link>
-        </p>
-      </form>
+      <div className='row'>
+        <div className='col s10 offset-s1 m8 offset-m2 l4 offset-l4'>
+          <h5>Sign In</h5>
+          <br />
+          <form>
+            <div className='input-field'>
+              <input
+                onChange={this.onChange}
+                name='email'
+                value={email}
+                id='email'
+                type='email'
+                className='validate'
+              />
+              <label htmlFor='email'>Email</label>
+            </div>
+            <div className='input-field'>
+              <input
+                onChange={this.onChange}
+                name='password'
+                value={password}
+                id='password'
+                type='password'
+                className='validate'
+              />
+              <label htmlFor='password'>Password</label>
+            </div>
+            <p>{error}</p>
+            <button
+              onClick={this.onSubmit}
+              disabled={isInvalid}
+              className='waves-effect waves-light btn'
+            >Login</button>
+            <p>
+              Don't have an account? <Link to='/sign_up'>Sign Up</Link>
+            </p>
+          </form>
+        </div>
+      </div>
     )
   }
 }

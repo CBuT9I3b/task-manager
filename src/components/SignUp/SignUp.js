@@ -23,8 +23,7 @@ class SignUp extends Component {
   };
 
   onSubmit = event => {
-    event.preventDefault();
-    let { username, email, passwordOne } = this.state;
+    const { username, email, passwordOne } = this.state;
     this.props.firebase.signUp(email, passwordOne)
       .then(authUser => (
         this.props.firebase.user(authUser.user.uid).set({
@@ -38,7 +37,8 @@ class SignUp extends Component {
       })
       .catch(error => {
         this.setState({error: error.message})
-      })
+      });
+    event.preventDefault()
   };
 
   render() {
@@ -51,47 +51,64 @@ class SignUp extends Component {
       passwordOne !== passwordTwo;
 
     return (
-      <form>
-        <h3>Sign Up</h3>
-        <input
-          onChange={this.onChange}
-          name='username'
-          value={username}
-          id='username'
-          type='text'
-        />
-        <label htmlFor='username'>Name</label>
-        <input
-          onChange={this.onChange}
-          name='email'
-          value={email}
-          id='email'
-          type='email'
-        />
-        <label htmlFor='email'>Email</label>
-        <input
-          onChange={this.onChange}
-          name='passwordOne'
-          value={passwordOne}
-          id='passwordOne'
-          type='password'
-        />
-        <label htmlFor='passwordOne'>Password</label>
-        <input
-          onChange={this.onChange}
-          name='passwordTwo'
-          value={passwordTwo}
-          id='passwordTwo'
-          type='password'
-        />
-        <label htmlFor='passwordTwo'>Re-enter Password</label>
-        <p>{error}</p>
-        <button
-          onClick={this.onSubmit}
-          disabled={isInvalid}
-        >Create Account</button>
-
-      </form>
+      <div className='row'>
+        <div className='col s10 offset-s1 m8 offset-m2 l4 offset-l4'>
+          <h5>Sign Up</h5>
+          <br />
+          <form>
+            <div className='input-field'>
+              <input
+                onChange={this.onChange}
+                name='username'
+                value={username}
+                id='username'
+                type='text'
+                className='validate'
+              />
+              <label htmlFor='username'>Name</label>
+            </div>
+            <div className='input-field'>
+              <input
+                onChange={this.onChange}
+                name='email'
+                value={email}
+                id='email'
+                type='email'
+                className='validate'
+              />
+              <label htmlFor='email'>Email</label>
+            </div>
+            <div className='input-field'>
+              <input
+                onChange={this.onChange}
+                name='passwordOne'
+                value={passwordOne}
+                id='passwordOne'
+                type='password'
+                className='validate'
+              />
+              <label htmlFor='passwordOne'>Password</label>
+            </div>
+            <div className='input-field'>
+              <input
+                onChange={this.onChange}
+                name='passwordTwo'
+                value={passwordTwo}
+                id='passwordTwo'
+                type='password'
+                className='validate'
+              />
+              <label htmlFor='passwordTwo'>Re-enter Password</label>
+            </div>
+            <p>{error}</p>
+            <button
+              onClick={this.onSubmit}
+              disabled={isInvalid}
+              className='waves-effect waves-light btn'
+            >Create Account</button>
+          </form>
+        </div>
+      </div>
     )
   }
 }

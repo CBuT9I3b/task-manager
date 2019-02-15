@@ -7,11 +7,13 @@ import { withAuthorization } from '../../containers'
 class Home extends Component {
   render() {
     return (
-      <div>
-        <h3>
-          Home Page
-        </h3>
-        <p>Hello {this.props.user}!</p>
+      <div className='row'>
+        <div className='col'>
+          <h5>
+            Home Page
+          </h5>
+          <p>Hello {this.props.user}!</p>
+        </div>
       </div>
     )
   }
