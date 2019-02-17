@@ -12,6 +12,7 @@ export class Firebase {
     this.auth = firebase.auth()
   }
   user = uid => this.db.ref(`users/${uid}`);
+  todos = uid => this.db.ref(`todos/${uid}`);
 
   signUp = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
   signIn = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
