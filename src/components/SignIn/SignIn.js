@@ -21,7 +21,7 @@ class SignIn extends Component {
   };
 
   onSubmit = event => {
-    const { email, password } = this.state;
+    let { email, password } = this.state;
     this.props.firebase.signIn(email, password)
       .then(() => {
         this.setState({...INITIAL_STATE});
@@ -44,7 +44,7 @@ class SignIn extends Component {
         <div className='col s10 offset-s1 m8 offset-m2 l4 offset-l4'>
           <h5>Sign In</h5>
           <br />
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className='input-field'>
               <input
                 onChange={this.onChange}
@@ -69,7 +69,7 @@ class SignIn extends Component {
             </div>
             <p>{error}</p>
             <button
-              onClick={this.onSubmit}
+              type='submit'
               disabled={isInvalid}
               className='waves-effect waves-light btn'
             >Login</button>

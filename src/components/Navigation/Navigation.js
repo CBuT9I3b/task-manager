@@ -32,7 +32,7 @@ const Navigation = ({ user }) => (
 );
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.userState
 });
 
 export default connect(mapStateToProps)(Navigation)

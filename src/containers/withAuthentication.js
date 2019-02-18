@@ -10,7 +10,7 @@ const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
     componentDidMount() {
       this.listener = this.props.firebase.onAuthUser(
-        authUser => this.props.onSetUser(authUser.username),
+        authUser => this.props.onSetUser(authUser),
         () => this.props.onSetUser(null)
       )
     }

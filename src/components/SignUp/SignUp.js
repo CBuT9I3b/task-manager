@@ -23,7 +23,7 @@ class SignUp extends Component {
   };
 
   onSubmit = event => {
-    const { username, email, passwordOne } = this.state;
+    let { username, email, passwordOne } = this.state;
     this.props.firebase.signUp(email, passwordOne)
       .then(authUser => (
         this.props.firebase.user(authUser.user.uid).set({
@@ -55,7 +55,7 @@ class SignUp extends Component {
         <div className='col s10 offset-s1 m8 offset-m2 l4 offset-l4'>
           <h5>Sign Up</h5>
           <br />
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className='input-field'>
               <input
                 onChange={this.onChange}
@@ -102,7 +102,7 @@ class SignUp extends Component {
             </div>
             <p>{error}</p>
             <button
-              onClick={this.onSubmit}
+              type='submit'
               disabled={isInvalid}
               className='waves-effect waves-light btn'
             >Create Account</button>
