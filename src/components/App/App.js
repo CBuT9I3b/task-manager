@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import { withAuthentication } from '../../containers'
 
-import { Navigation, Landing, Home, SignUp, SignIn } from '..'
+import { Navigation, Landing, Home, Manager, SignUp, SignIn } from '..'
 
 const App = () => (
   <BrowserRouter>
@@ -11,6 +11,7 @@ const App = () => (
       <Navigation />
       <Route exact path='/' component={Landing} />
       <Route path='/home' component={Home} />
+      <Route path='/manager' component={Manager} />
       <Route path='/sign_up' component={SignUp} />
       <Route path='/sign_in' component={SignIn} />
     </div>

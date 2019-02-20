@@ -21,6 +21,7 @@ const NavigationAuth = () => (
       <ul id='nav-mobile' className='right'>
         <li><NavLink to='/'>Landing</NavLink></li>
         <li><NavLink to='/home'>Home</NavLink></li>
+        <li><NavLink to='/manager'>Manager</NavLink></li>
         <li><SignOut /></li>
       </ul>
     </div>

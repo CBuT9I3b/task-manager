@@ -6,8 +6,8 @@ export const todosReducer = (state = [], action) => {
       return {
         ...state,
         todos: action.todos
-      }
+      };
     default:
       return state
   }
-}
+};

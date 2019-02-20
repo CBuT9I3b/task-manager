@@ -7,11 +7,12 @@ import { configFirebase } from '.'
 export class Firebase {
   constructor() {
     firebase.initializeApp(configFirebase);
-    this.serverValue = firebase.database.ServerValue
+    this.serverValue = firebase.database.ServerValue;
     this.db = firebase.database();
     this.auth = firebase.auth()
   }
   user = uid => this.db.ref(`users/${uid}`);
+  todo = uid => this.db.ref(`todos/${uid}`);
   todos = () => this.db.ref(`todos`);
 
   signUp = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
