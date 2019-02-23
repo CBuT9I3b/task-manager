@@ -1,7 +1,7 @@
 import React from 'react'
 
-const TodoItem = ({ todo, onRemoveTodo }) => (
-  <li className='collection-item'>
+const TodoItem = ({ todo, onRemoveTodo, onSelectTodo }) => (
+  <li className='collection-item' onClick={() => onSelectTodo(todo)}>
     <div>
       {todo.text}
       <a

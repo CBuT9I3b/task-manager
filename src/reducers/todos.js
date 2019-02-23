@@ -1,11 +1,37 @@
-import { SET_TODOS } from '../actions'
+import { SET_TODOS, SELECT_TODO, SET_TASKS } from '../actions'
 
-export const todosReducer = (state = [], action) => {
+export const selectTodo = (state = null, action) => {
+  switch (action.type) {
+    case SELECT_TODO:
+      return action.todo;
+    default:
+      return state
+  }
+};
+
+const tasksReducer = (state = [], action) => {
+  switch (action.type) {
+    case SET_TASKS:
+      return {
+        ...state,
+        tasks: action.tasks
+      };
+    default:
+      return state
+  }
+};
+
+export const todosReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_TODOS:
       return {
         ...state,
         todos: action.todos
+      };
+    case SET_TASKS:
+      return {
+        ...state,
+        [action.todo]: tasksReducer(state[action.todo], action)
       };
     default:
       return state

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import { withFirebase } from '../../services'
-import { setTodos } from '../../actions'
+import { setTodos, selectTodo } from '../../actions'
 import TodosList from './TodosList'
 
 class Todos extends Component {
@@ -21,9 +21,9 @@ class Todos extends Component {
     this.props.firebase.todos().off()
   }
 
-  onListenerTodos = user => {
+  onListenerTodos = userUid => {
     this.props.firebase.todos()
-      .orderByChild(user)
+      .orderByChild(userUid)
       .on('value', snapshot => (
         this.props.onSetTodos(snapshot.val())
       ))
@@ -46,6 +46,12 @@ class Todos extends Component {
     this.setState({text: event.target.value})
   };
 
+  onSelectTodo = todo => {
+    if (this.props.selectedTodo !== todo) {
+      this.props.onSelectTodo(todo)
+    }
+  };
+
   render() {
     let { uid, todos } = this.props;
     let { text } = this.state;
@@ -53,7 +59,11 @@ class Todos extends Component {
 
     return (
       <div>
-        <TodosList todos={todos} onRemoveTodo={this.onRemoveTodo} />
+        <TodosList
+          todos={todos}
+          onRemoveTodo={this.onRemoveTodo}
+          onSelectTodo={this.onSelectTodo}
+        />
         <form onSubmit={event => this.onCreateTodo(event, uid)}>
           <div className='input-field'>
             <input
@@ -76,19 +86,21 @@ class Todos extends Component {
   }
 }
 
-const mapStateToProps = ({ userState, todosState }) => {
+const mapStateToProps = ({ userState, todosState, selectedTodo }) => {
   let { uid } = userState || null;
-  let todos = Object.keys(todosState.todos || []).map(
-    key => ({
-      ...todosState.todos[key],
-      uid: key
-    })
-  );
-  return { uid, todos }
+  let todos = todosState.todos || [];
+  return { uid, todos, selectedTodo }
 };
 
 const mapDispatchToProps = dispatch => ({
-  onSetTodos: todos => dispatch(setTodos(todos))
+  onSetTodos: todos => {
+    let listTodos = Object.keys(todos || []).map(key => ({
+      ...todos[key],
+      uid: key
+    }));
+    dispatch(setTodos(listTodos))
+  },
+  onSelectTodo: todo => dispatch(selectTodo(todo))
 });
 
 export default compose(

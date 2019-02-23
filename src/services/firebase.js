@@ -12,27 +12,34 @@ export class Firebase {
     this.auth = firebase.auth()
   }
   user = uid => this.db.ref(`users/${uid}`);
+  users = () => this.db.ref('users');
   todo = uid => this.db.ref(`todos/${uid}`);
   todos = () => this.db.ref(`todos`);
+  task = uid => this.db.ref(`tasks/${uid}`);
+  tasks = () => this.db.ref('tasks');
 
-  signUp = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
-  signIn = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
-  signOut = () => this.auth.signOut();
+  signUp = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
+  signIn = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+  signOut = () =>
+    this.auth.signOut();
 
-  onAuthUser = (next, fallback) => this.auth.onAuthStateChanged(authUser => {
-    if (authUser) {
-      this.user(authUser.uid).once('value')
-        .then(snapshot => {
-          const dbUser = snapshot.val();
-          authUser = {
-            uid: authUser.uid,
-            email: authUser.email,
-            ...dbUser
-          };
-          next(authUser)
-        })
-    } else {
-      fallback()
-    }
-  })
+  onAuthUser = (callback, fallback) =>
+    this.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        this.user(authUser.uid).once('value')
+          .then(snapshot => {
+            const dbUser = snapshot.val();
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              ...dbUser
+            };
+            callback(authUser)
+          })
+      } else {
+        fallback()
+      }
+    })
 }
