@@ -14,32 +14,35 @@ class Todos extends Component {
     }
   }
   componentDidMount() {
-    this.onListenerTodos(this.props.uid)
+    this.onListenerTodos(this.props.userUid)
   }
 
   componentWillMount() {
-    this.props.firebase.todos().off()
+    this.props.firebase.todos().off();
+    this.props.onSetTodos([]);
+    this.props.onSelectTodo({ uid: null })
   }
 
   onListenerTodos = userUid => {
     this.props.firebase.todos()
-      .orderByChild(userUid)
+      .orderByChild('user')
+      .equalTo(userUid)
       .on('value', snapshot => (
         this.props.onSetTodos(snapshot.val())
       ))
   };
 
-  onCreateTodo = (event, uid) => {
+  onCreateTodo = (event, userUid) => {
     this.props.firebase.todos().push({
-      user: uid,
+      user: userUid,
       text: this.state.text
     });
     this.setState({text: ''});
     event.preventDefault()
   };
 
-  onRemoveTodo = uid => {
-    this.props.firebase.todo(uid).remove()
+  onRemoveTodo = todoUid => {
+    this.props.firebase.todo(todoUid).remove()
   };
 
   onChangeText = event => {
@@ -53,9 +56,9 @@ class Todos extends Component {
   };
 
   render() {
-    let { uid, todos } = this.props;
+    let { userUid, todos } = this.props;
     let { text } = this.state;
-    let IsInvalid = text === '';
+    let isInvalid = text === '';
 
     return (
       <div>
@@ -64,7 +67,7 @@ class Todos extends Component {
           onRemoveTodo={this.onRemoveTodo}
           onSelectTodo={this.onSelectTodo}
         />
-        <form onSubmit={event => this.onCreateTodo(event, uid)}>
+        <form onSubmit={event => this.onCreateTodo(event, userUid)}>
           <div className='input-field'>
             <input
               id='new_todo'
@@ -76,7 +79,7 @@ class Todos extends Component {
             <label htmlFor='new_todo'>New Todo</label>
             <button
               className='btn-floating waves-effect waves-light'
-              disabled={IsInvalid}
+              disabled={isInvalid}
               type='submit'
             ><i className="material-icons">add</i></button>
           </div>
@@ -87,9 +90,9 @@ class Todos extends Component {
 }
 
 const mapStateToProps = ({ userState, todosState, selectedTodo }) => {
-  let { uid } = userState || null;
+  let { uid: userUid } = userState || null;
   let todos = todosState.todos || [];
-  return { uid, todos, selectedTodo }
+  return { userUid, todos, selectedTodo }
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -12,8 +12,7 @@ export const setTodos = todos => ({
   todos
 });
 
-export const setTasks = (todo, tasks) => ({
+export const setTasks = tasks => ({
   type: SET_TASKS,
-  todo,
   tasks
 });
