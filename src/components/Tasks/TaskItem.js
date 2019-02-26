@@ -5,10 +5,10 @@ const TaskItem = ({ task, onRemoveTask }) => (
     <div>
       {task.text}
       <a
-        href="#!"
-        className="secondary-content"
+        href='#!'
+        className='secondary-content'
         onClick={() => onRemoveTask(task.uid)}
-      ><i className="material-icons">close</i></a>
+      ><i className='material-icons'>close</i></a>
     </div>
   </li>
 );

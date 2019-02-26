@@ -56,7 +56,7 @@ class Todos extends Component {
   };
 
   render() {
-    let { userUid, todos } = this.props;
+    let { userUid, todos, selectedTodo } = this.props;
     let { text } = this.state;
     let isInvalid = text === '';
 
@@ -64,6 +64,7 @@ class Todos extends Component {
       <div>
         <TodosList
           todos={todos}
+          selectedTodo={selectedTodo}
           onRemoveTodo={this.onRemoveTodo}
           onSelectTodo={this.onSelectTodo}
         />
