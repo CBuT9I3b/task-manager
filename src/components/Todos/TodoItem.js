@@ -3,8 +3,7 @@ import React from 'react'
 const TodoItem = ({ todo, isActive, onRemoveTodo, onSelectTodo }) => {
   let mStyle = isActive ? 'collection-item active' : 'collection-item';
   return (
-    <a
-      href='#!'
+    <li
       className={mStyle}
       onClick={() => onSelectTodo(todo)}
     >
@@ -16,7 +15,7 @@ const TodoItem = ({ todo, isActive, onRemoveTodo, onSelectTodo }) => {
           onClick={() => onRemoveTodo(todo.uid)}
         ><i className='material-icons'>close</i></a>
       </div>
-    </a>
+    </li>
   )
 };
 

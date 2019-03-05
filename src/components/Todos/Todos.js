@@ -42,7 +42,15 @@ class Todos extends Component {
   };
 
   onRemoveTodo = todoUid => {
-    this.props.firebase.todo(todoUid).remove()
+    this.props.firebase.todo(todoUid).remove();
+    let tasksRef = this.props.firebase.tasks();
+    tasksRef.orderByChild('todo')
+      .equalTo(todoUid)
+      .once('value', snapshot => {
+        let updates = {};
+        snapshot.forEach(task => updates[task.key] = null);
+        tasksRef.update(updates)
+      })
   };
 
   onChangeText = event => {
