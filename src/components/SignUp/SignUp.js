@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 import { withFirebase } from '../../services'
@@ -33,7 +33,7 @@ class SignUp extends Component {
       ))
       .then(() => {
         this.setState({...INITIAL_STATE});
-        this.props.history.push('/home')
+        this.props.history.push('/manager')
       })
       .catch(error => {
         this.setState({error: error.message})
@@ -100,12 +100,15 @@ class SignUp extends Component {
               />
               <label htmlFor='passwordTwo'>Re-enter Password</label>
             </div>
-            <p>{error}</p>
+            <p className='red-text'>{error}</p>
             <button
               type='submit'
               disabled={isInvalid}
               className='waves-effect waves-light btn'
             >Create Account</button>
+            <p>
+              Have an account? <Link to='/sign_in'>Sign In</Link>
+            </p>
           </form>
         </div>
       </div>

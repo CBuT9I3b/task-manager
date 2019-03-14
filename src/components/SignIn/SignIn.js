@@ -25,10 +25,13 @@ class SignIn extends Component {
     this.props.firebase.signIn(email, password)
       .then(() => {
         this.setState({...INITIAL_STATE});
-        this.props.history.push('/home')
+        this.props.history.push('/manager')
       })
       .catch(error => {
-        this.setState({error: error.message})
+        this.setState({
+          password: '',
+          error: error.message
+        })
       });
     event.preventDefault()
   };
@@ -67,7 +70,7 @@ class SignIn extends Component {
               />
               <label htmlFor='password'>Password</label>
             </div>
-            <p>{error}</p>
+            <p className='red-text'>{error}</p>
             <button
               type='submit'
               disabled={isInvalid}
