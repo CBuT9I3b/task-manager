@@ -26,6 +26,13 @@ class ModalAddTodo extends Component {
 
   onChangeText = event => this.setState({ text: event.target.value });
 
+  onCreateTodo = (event, text) => {
+    this.props.onCreateTodo(text);
+    this.setState({ text: '' });
+    this.onClose();
+    event.preventDefault()
+  };
+
   render() {
     let { text } = this.state;
     let isInvalid = text === '';
@@ -35,15 +42,15 @@ class ModalAddTodo extends Component {
         <button
           onClick={this.onOpen}
           className='btn waves-effect waves-light'
-        >New Todo</button>
+        >New List</button>
         <div
           ref={this.getModalRef}
           style={style}
           className='modal'
         >
           <div className='modal-content'>
-            <h4>Add New Todo List</h4>
-            <form>
+            <h4>Enter List Title</h4>
+            <form onSubmit={event => this.onCreateTodo(event, text)}>
               <div className='input-field'>
                 <input
                   value={text}
@@ -62,7 +69,7 @@ class ModalAddTodo extends Component {
             >Cancel</button>
             <button
               disabled={isInvalid}
-              onClick={this.onClose}
+              onClick={event => this.onCreateTodo(event, text)}
               className='btn-flat waves-effect waves-green'
             >Ok</button>
           </div>

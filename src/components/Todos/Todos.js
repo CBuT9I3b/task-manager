@@ -4,15 +4,10 @@ import { compose } from 'redux'
 
 import { withFirebase } from '../../services'
 import { setTodos, selectTodo } from '../../actions'
+import ModalAddTodo from './ModalAddTodo'
 import TodosList from './TodosList'
 
 class Todos extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: ''
-    }
-  }
   componentDidMount() {
     this.onListenerTodos(this.props.userUid)
   }
@@ -32,13 +27,11 @@ class Todos extends Component {
       ))
   };
 
-  onCreateTodo = (event, userUid) => {
+  onCreateTodo = text => {
     this.props.firebase.todos().push({
-      user: userUid,
-      text: this.state.text
-    });
-    this.setState({text: ''});
-    event.preventDefault()
+      user: this.props.userUid,
+      text: text
+    })
   };
 
   onRemoveTodo = todoUid => {
@@ -53,10 +46,6 @@ class Todos extends Component {
       })
   };
 
-  onChangeText = event => {
-    this.setState({text: event.target.value})
-  };
-
   onSelectTodo = todo => {
     if (this.props.selectedTodo !== todo) {
       this.props.onSelectTodo(todo)
@@ -64,9 +53,7 @@ class Todos extends Component {
   };
 
   render() {
-    let { userUid, todos, selectedTodo } = this.props;
-    let { text } = this.state;
-    let isInvalid = text === '';
+    let { todos, selectedTodo } = this.props;
 
     return (
       <div>
@@ -76,23 +63,9 @@ class Todos extends Component {
           onRemoveTodo={this.onRemoveTodo}
           onSelectTodo={this.onSelectTodo}
         />
-        <form onSubmit={event => this.onCreateTodo(event, userUid)}>
-          <div className='input-field'>
-            <input
-              id='new_todo'
-              type='text'
-              value={text}
-              onChange={this.onChangeText}
-              className='validate'
-            />
-            <label htmlFor='new_todo'>New Todo</label>
-            <button
-              className='btn-floating waves-effect waves-light'
-              disabled={isInvalid}
-              type='submit'
-            ><i className="material-icons">add</i></button>
-          </div>
-        </form>
+        <ModalAddTodo
+          onCreateTodo={this.onCreateTodo}
+        />
       </div>
     )
   }
