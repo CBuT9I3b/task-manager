@@ -8,10 +8,23 @@ import { setUser } from '../actions'
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
+    constructor(props) {
+      super(props);
+      this.props.onSetUser(
+        JSON.parse(localStorage.getItem('authUser'))
+      )
+    }
+
     componentDidMount() {
       this.listener = this.props.firebase.onAuthUser(
-        authUser => this.props.onSetUser(authUser),
-        () => this.props.onSetUser(null)
+        authUser => {
+          localStorage.setItem('authUser', JSON.stringify(authUser));
+          this.props.onSetUser(authUser)
+        },
+        () => {
+          localStorage.removeItem('authUser');
+          this.props.onSetUser(null)
+        }
       )
     }
 
