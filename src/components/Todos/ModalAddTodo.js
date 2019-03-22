@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { createPortal } from 'react-dom'
 
 import M from 'materialize-css'
 
@@ -8,6 +9,7 @@ class ModalAddTodo extends Component {
   constructor(props) {
     super(props);
     this.modalRef = null;
+    this.createRoot();
     this.state = {
       text: ''
     }
@@ -18,31 +20,25 @@ class ModalAddTodo extends Component {
     this.modal = M.Modal.getInstance(this.modalRef)
   }
 
-  getModalRef = modal => { this.modalRef = modal };
+  componentWillUnmount() {
+    document.body.removeChild(this.modalRoot);
+    this.modalRoot = null
+  }
 
-  onOpen = () => this.modal.open();
-
-  onClose = () => this.modal.close();
-
-  onChangeText = event => this.setState({ text: event.target.value });
-
-  onCreateTodo = (event, text) => {
-    this.props.onCreateTodo(text);
-    this.setState({ text: '' });
-    this.onClose();
-    event.preventDefault()
+  createRoot = () => {
+    this.modalRoot = document.createElement('div');
+    document.body.appendChild(this.modalRoot)
   };
 
-  render() {
+  getModalRef = modal => { this.modalRef = modal };
+
+  renderModal = () => {
     let { text } = this.state;
     let isInvalid = text === '';
 
     return (
-      <div>
-        <button
-          onClick={this.onOpen}
-          className='btn waves-effect waves-light'
-        >New List</button>
+      this.modalRoot &&
+      createPortal(
         <div
           ref={this.getModalRef}
           style={style}
@@ -73,7 +69,33 @@ class ModalAddTodo extends Component {
               className='btn-flat waves-effect waves-green'
             >Ok</button>
           </div>
-        </div>
+        </div>,
+        this.modalRoot
+      )
+    )
+  };
+
+  onOpen = () => this.modal.open();
+
+  onClose = () => this.modal.close();
+
+  onChangeText = event => this.setState({ text: event.target.value });
+
+  onCreateTodo = (event, text) => {
+    this.props.onCreateTodo(text);
+    this.setState({ text: '' });
+    this.onClose();
+    event.preventDefault()
+  };
+
+  render() {
+    return (
+      <div>
+        <button
+          onClick={this.onOpen}
+          className='btn waves-effect waves-light'
+        >New List</button>
+        {this.renderModal()}
       </div>
     )
   }
