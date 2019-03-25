@@ -4,14 +4,16 @@ import { withAuthorization } from '../../containers'
 import { Todos, Tasks } from '..'
 
 const Manager = () => (
-  <div className='row'>
-    <div className='col l5'>
-      <h6>Todos</h6>
-      <Todos />
-    </div>
-    <div className='col l5'>
-      <h6>Tasks</h6>
-      <Tasks />
+  <div className='container'>
+    <div className='row'>
+      <div className='col s3 m3 l3'>
+        <h5>Todos</h5>
+        <Todos />
+      </div>
+      <div className='col s9 m9 l9'>
+        <h5>Tasks</h5>
+        <Tasks />
+      </div>
     </div>
   </div>
 );

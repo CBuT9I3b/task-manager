@@ -5,7 +5,7 @@ import M from 'materialize-css/dist/js/materialize.js'
 
 import { SignIn, SignUp } from '..'
 
-class ModalLogin extends Component {
+class ModalSignIn extends Component {
   constructor(props) {
     super(props);
     this.modalRef = null;
@@ -53,8 +53,8 @@ class ModalLogin extends Component {
           className='modal'
         >
           <div className='modal-content'>
-            <Route to='/sign_in' component={() => <SignIn onClose={this.onClose}/>} />
-            <Route to='/sign_up' component={() => <SignUp onClose={this.onClose}/>} />
+            <Route path='/sign_in' component={() => <SignIn onClose={this.onClose}/>} />
+            <Route path='/sign_up' component={() => <SignUp onClose={this.onClose}/>} />
           </div>
         </div>,
         this.modalRoot
@@ -71,11 +71,11 @@ class ModalLogin extends Component {
         <NavLink
           to='/sign_in'
           onClick={this.onOpen}
-        >Modal Open Button</NavLink>
+        >Sign In</NavLink>
         {this.renderModal()}
       </div>
     )
   }
 }
 
-export default ModalLogin
+export default ModalSignIn
