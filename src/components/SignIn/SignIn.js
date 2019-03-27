@@ -75,7 +75,7 @@ class SignIn extends Component {
               type='submit'
               disabled={isInvalid}
               className='waves-effect waves-light btn'
-            >Login</button>
+            >Sign in</button>
             <p>
               Don't have an account? <Link to='/sign_up'>Sign Up</Link>
             </p>
