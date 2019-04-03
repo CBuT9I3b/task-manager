@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { configureStore } from '../store'
 
 import { Firebase, FirebaseContext } from '../services'
-import { App } from '../components'
+import { App } from '../new'
 
 const store = configureStore();
 
