@@ -1,12 +1,15 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+
+import { withAuthentication } from '../../containers'
 
 import { TopNav, SideNav } from '..'
 
 const App = () => (
-  <div>
+  <BrowserRouter>
     <TopNav />
     <SideNav />
-  </div>
+  </BrowserRouter>
 );
 
-export default App
+export default withAuthentication(App)

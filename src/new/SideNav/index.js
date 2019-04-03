@@ -1,11 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+const SideNavNonAuth = () => (
+  <ul>
+
+  </ul>
+)
+
+const SideNavAuth = () => (
+  <ul>
+
+  </ul>
+)
 
 const SideNav = () => (
-  <ul className='sidenav sidenav-fixed deep-orange accent-1'>
+  <ul className='sidenav sidenav-fixed'>
     <li><a href='#!'>Link 1</a></li>
     <li><a href='#!'>Link 2</a></li>
     <li><a href='#!'>Link 3</a></li>
   </ul>
 );
 
-export default SideNav
+const mapStateToProps = ({ userState }) => ({
+  user: userState
+});
+
+export default connect(mapStateToProps)(SideNav)
