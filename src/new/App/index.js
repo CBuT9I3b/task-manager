@@ -3,12 +3,12 @@ import { BrowserRouter } from 'react-router-dom'
 
 import { withAuthentication } from '../../containers'
 
-import { TopNav, SideNav } from '..'
+import { Header, Main } from '..'
 
 const App = () => (
   <BrowserRouter>
-    <TopNav />
-    <SideNav />
+    <Header />
+    <Main />
   </BrowserRouter>
 );
 

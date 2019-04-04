@@ -5,6 +5,7 @@ import M from 'materialize-css'
 
 import 'materialize-css/dist/css/materialize.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import './index.css'
 
 import { Root } from './containers'
 
