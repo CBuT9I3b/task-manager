@@ -3,7 +3,8 @@ import { createPortal } from 'react-dom'
 import { Route, NavLink } from 'react-router-dom'
 import M from 'materialize-css/dist/js/materialize.js'
 
-import { SignIn, SignUp } from '..'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
 
 class ModalSignIn extends Component {
   constructor(props) {
@@ -71,6 +72,7 @@ class ModalSignIn extends Component {
         <NavLink
           to='/sign_in'
           onClick={this.onOpen}
+          className='btn-flat waves-effect waves-purple'
         >Sign In</NavLink>
         {this.renderModal()}
       </div>
