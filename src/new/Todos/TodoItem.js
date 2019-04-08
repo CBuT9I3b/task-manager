@@ -8,7 +8,7 @@ const TodoItem = ({ todo, isActive, onRemoveTodo, onSelectTodo }) => {
     >
       <a
         href='#!'
-        className={isActive ? 'waves-effect waves-red white-text' : 'waves-effect waves-red'}
+        className={isActive ? 'white-text waves-effect waves-red' : 'waves-effect waves-red'}
       >{todo.text}</a>
     </li>
   )

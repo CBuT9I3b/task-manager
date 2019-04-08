@@ -3,8 +3,6 @@ import { createPortal } from 'react-dom'
 
 import M from 'materialize-css'
 
-const style = { maxWidth: '500px' };
-
 class ModalAddTodo extends Component {
   constructor(props) {
     super(props);
@@ -41,11 +39,10 @@ class ModalAddTodo extends Component {
       createPortal(
         <div
           ref={this.getModalRef}
-          style={style}
           className='modal'
         >
           <div className='modal-content'>
-            <h4>Enter List Title</h4>
+            <h6>Enter List Name</h6>
             <form onSubmit={event => this.onCreateTodo(event, text)}>
               <div className='input-field'>
                 <input
@@ -54,7 +51,7 @@ class ModalAddTodo extends Component {
                   id='new_todo'
                   type='text'
                 />
-                <label htmlFor='new_todo'>List Title</label>
+                <label htmlFor='new_todo'>List Name</label>
               </div>
             </form>
           </div>
@@ -90,13 +87,14 @@ class ModalAddTodo extends Component {
 
   render() {
     return (
-      <div>
-        <button
+      <li>
+        <a
+          href='#!'
           onClick={this.onOpen}
-          className='btn waves-effect waves-light'
-        >New List</button>
+          className='waves-effect waves-red'
+        ><i className="material-icons">add</i>New List</a>
         {this.renderModal()}
-      </div>
+      </li>
     )
   }
 }

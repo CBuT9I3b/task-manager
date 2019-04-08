@@ -16,10 +16,7 @@ const TodosList = ({ todos, selectedTodo, onSelectTodo, onRemoveTodo }) => {
   } else {
     return (
       <li>
-        <a
-          href='#!'
-          className='waves-effect waves-purple'
-        >No Todos</a>
+        <a href='#!' className='subheader'>No To-Do Lists</a>
       </li>
     )
   }

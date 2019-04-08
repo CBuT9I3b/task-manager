@@ -52,7 +52,12 @@ const withTodos = Component => {
     };
 
     render() {
-      return <Component {...this.props} />
+      return <Component
+        {...this.props}
+        onCreateTodo={this.onCreateTodo}
+        onRemoveTodo={this.onRemoveTodo}
+        onSelectTodo={this.onSelectTodo}
+      />
     }
   }
 

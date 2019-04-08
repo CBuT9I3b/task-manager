@@ -1,6 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+
+import { withUser } from '../../containers'
 
 import { SignOut, Todos } from '..'
 
@@ -15,7 +16,7 @@ const SideNavAuth = () => (
   <ul className='sidenav sidenav-fixed deep-orange accent-1'>
     <li><NavLink to='/'>Home</NavLink></li>
     <li><div className='divider' /></li>
-    <li><a className='subheader'>Todos</a></li>
+    <li><a href='#!' className='subheader'>To-Do Lists:</a></li>
     <Todos />
     <li><div className='divider' /></li>
     <li><SignOut /></li>
@@ -26,8 +27,4 @@ const SideNav = ({ user }) => (
   user ? <SideNavAuth /> : <SideNavNonAuth/>
 );
 
-const mapStateToProps = ({ userState }) => ({
-  user: userState
-});
-
-export default connect(mapStateToProps)(SideNav)
+export default withUser(SideNav)

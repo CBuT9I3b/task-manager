@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
+
+import { withUser } from '../../containers'
 
 import { Landing, Tasks, SignIn, SignUp } from '..'
 
@@ -16,8 +17,4 @@ const Main = ({ user }) => (
   </main>
 );
 
-const mapDispatchToProps = ({ userState }) => ({
-  user: userState
-});
-
-export default connect(mapDispatchToProps)(Main)
+export default withUser(Main)

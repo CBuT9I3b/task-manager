@@ -33,7 +33,7 @@ class SignUp extends Component {
       ))
       .then(() => {
         this.setState({...INITIAL_STATE});
-        this.props.history.push('/manager')
+        this.props.history.push('/')
       })
       .catch(error => {
         this.setState({error: error.message})
