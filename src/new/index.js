@@ -4,6 +4,7 @@ export { default as SignOut } from './SignOut'
 export { default as ModalSignIn } from './ModalSignIn'
 
 export { default as SideNav } from './SideNav'
+export { default as UserBar } from './UserBar'
 export { default as Todos } from './Todos'
 export { default as TopNav } from './TopNav'
 export { default as Header } from './Header'
