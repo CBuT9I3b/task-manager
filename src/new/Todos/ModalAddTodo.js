@@ -45,6 +45,7 @@ class ModalAddTodo extends Component {
             <h6>Enter List Name</h6>
             <form onSubmit={event => this.onCreateTodo(event, text)}>
               <div className='input-field'>
+                <i className='material-icons'>create</i>
                 <input
                   value={text}
                   onChange={this.onChangeText}

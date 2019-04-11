@@ -4,12 +4,14 @@ const TodoItem = ({ todo, isActive, onRemoveTodo, onSelectTodo }) => {
   return (
     <li
       onClick={() => onSelectTodo(todo)}
-      className={isActive ? 'deep-orange accent-2' : undefined}
+      className={isActive ? 'indigo darken-4' : undefined}
     >
       <a
         href='#!'
-        className={isActive ? 'white-text waves-effect waves-red' : 'waves-effect waves-red'}
-      >{todo.text}</a>
+        className={isActive ? 'white-text waves-effect waves-purple' : 'waves-effect waves-purple'}
+      >
+        {todo.text}
+      </a>
     </li>
   )
 };
