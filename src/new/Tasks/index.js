@@ -3,6 +3,7 @@ import React from 'react'
 import { withTasks } from '../../containers'
 
 import TasksList from './TasksList'
+import AddTask from './AddTask'
 
 const Tasks = ({ tasks, onRemoveTask }) => (
   <div>
@@ -11,6 +12,7 @@ const Tasks = ({ tasks, onRemoveTask }) => (
       tasks={tasks}
       onRemoveTask={onRemoveTask}
     />
+    <AddTask />
   </div>
 );
 
