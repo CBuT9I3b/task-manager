@@ -9,20 +9,42 @@ class AddTask extends Component {
     }
   }
 
+  onToggleActive = () => this.setState({ isActive: true });
+
+  onChangeText = event => this.setState({ text: event.target.value });
+
   render() {
+    let { text, isActive } = this.state;
+    let isInvalid = text === '';
+
     return (
-      <form>
-        <div className='row'>
-          <div className='col s12 m8 l8'>
-            Enter Your Task:
-            <div className='input-field'>
+      isActive ?
+        <form>
+          <div className='row'>
+            <div className='input-field col s12 m8 l8'>
               <i className='material-icons prefix'>create</i>
-              <input id='add_task' type='text' className='validate' />
+              <input
+                onChange={this.onChangeText}
+                value={text}
+                id='add_task'
+                type='text'
+                className='validate'
+              />
               <label htmlFor='add_task'>Task</label>
             </div>
           </div>
-        </div>
-      </form>
+          <button
+            className='btn-flat waves-effect waves-red'
+          >Cancel</button>
+          <button
+            disabled={isInvalid}
+            className='btn-flat waves-effect waves-green'
+          >Ok</button>
+        </form> :
+        <button
+          onClick={this.onToggleActive}
+          className='btn-flat waves-effect waves-teal'
+        ><i className='material-icons left'>add</i>New Task</button>
     )
   }
 }
