@@ -45,14 +45,14 @@ class ModalAddTodo extends Component {
             <h6>Enter List Name</h6>
             <form onSubmit={event => this.onCreateTodo(event, text)}>
               <div className='input-field'>
-                <i className='material-icons'>create</i>
+                <i className='material-icons prefix'>create</i>
                 <input
                   value={text}
                   onChange={this.onChangeText}
                   id='new_todo'
                   type='text'
                 />
-                <label htmlFor='new_todo'>List Name</label>
+                <label htmlFor='new_todo'>To-Do List</label>
               </div>
             </form>
           </div>
@@ -92,7 +92,7 @@ class ModalAddTodo extends Component {
         <a
           href='#!'
           onClick={this.onOpen}
-          className='waves-effect waves-red'
+          className='waves-effect waves-teal'
         ><i className="material-icons">add</i>New List</a>
         {this.renderModal()}
       </li>

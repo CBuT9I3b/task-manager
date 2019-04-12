@@ -7,7 +7,7 @@ const SignOut = ({ firebase }) => (
   <NavLink
     to='/'
     onClick={firebase.signOut}
-    className='waves-effect waves-red'
+    className='waves-effect waves-teal'
   ><i className='material-icons'>exit_to_app</i>Sign Out</NavLink>
 );
 
