@@ -5,14 +5,16 @@ import { withTasks } from '../../containers'
 import TasksList from './TasksList'
 import AddTask from './AddTask'
 
-const Tasks = ({ tasks, onRemoveTask }) => (
+const Tasks = ({ tasks, onCreateTask, onRemoveTask }) => (
   <div>
     <h5>Tasks</h5>
     <TasksList
       tasks={tasks}
       onRemoveTask={onRemoveTask}
     />
-    <AddTask />
+    <AddTask
+      onCreateTask={onCreateTask}
+    />
   </div>
 );
 
