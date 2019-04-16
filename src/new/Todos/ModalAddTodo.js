@@ -47,25 +47,23 @@ class ModalAddTodo extends Component {
               <div className='input-field'>
                 <i className='material-icons prefix'>create</i>
                 <input
-                  value={text}
                   onChange={this.onChangeText}
-                  id='new_todo'
+                  value={text}
                   type='text'
+                  id='new_todo'
                 />
                 <label htmlFor='new_todo'>To-Do List</label>
               </div>
+              <button
+                disabled={isInvalid}
+                type='submit'
+                className='btn-flat waves-effect waves-green'
+              >Ok</button>
+              <button
+                onClick={this.onClose}
+                className='btn-flat waves-effect waves-red'
+              >Cancel</button>
             </form>
-          </div>
-          <div className='modal-footer'>
-            <button
-              onClick={this.onClose}
-              className='btn-flat waves-effect waves-red'
-            >Cancel</button>
-            <button
-              disabled={isInvalid}
-              onClick={event => this.onCreateTodo(event, text)}
-              className='btn-flat waves-effect waves-green'
-            >Ok</button>
           </div>
         </div>,
         this.modalRoot
@@ -73,17 +71,23 @@ class ModalAddTodo extends Component {
     )
   };
 
-  onOpen = () => this.modal.open();
+  onOpen = () => {
+    this.modal.open()
+  };
 
-  onClose = () => this.modal.close();
+  onClose = event => {
+    this.modal.close();
+    event.preventDefault()
+  };
 
-  onChangeText = event => this.setState({ text: event.target.value });
+  onChangeText = event => {
+    this.setState({ text: event.target.value })
+  };
 
   onCreateTodo = (event, text) => {
     this.props.onCreateTodo(text);
     this.setState({ text: '' });
-    this.onClose();
-    event.preventDefault()
+    this.onClose(event)
   };
 
   render() {

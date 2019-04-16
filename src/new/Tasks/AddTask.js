@@ -4,14 +4,27 @@ class AddTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
-      isActive: false
+      isActive: false,
+      text: ''
     }
   }
 
-  onToggleActive = () => this.setState({ isActive: true });
+  onToggleActive = event => {
+    this.setState({
+      isActive: !this.state.isActive,
+      text: ''
+    });
+    event.preventDefault()
+  };
 
-  onChangeText = event => this.setState({ text: event.target.value });
+  onChangeText = event => {
+    this.setState({ text: event.target.value })
+  };
+
+  onCreateTask = (event, text) => {
+    this.props.onCreateTask(text);
+    this.onToggleActive(event)
+  };
 
   render() {
     let { text, isActive } = this.state;
@@ -19,7 +32,7 @@ class AddTask extends Component {
 
     return (
       isActive ?
-        <form>
+        <form onSubmit={event => this.onCreateTask(event, text)}>
           <div className='row'>
             <div className='input-field col s12 m8 l8'>
               <i className='material-icons prefix'>create</i>
@@ -34,12 +47,14 @@ class AddTask extends Component {
             </div>
           </div>
           <button
-            className='btn-flat waves-effect waves-red'
-          >Cancel</button>
-          <button
             disabled={isInvalid}
+            type='submit'
             className='btn-flat waves-effect waves-green'
           >Ok</button>
+          <button
+            onClick={this.onToggleActive}
+            className='btn-flat waves-effect waves-red'
+          >Cancel</button>
         </form> :
         <button
           onClick={this.onToggleActive}

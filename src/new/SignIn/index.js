@@ -51,10 +51,10 @@ class SignIn extends Component {
             <div className='input-field'>
               <input
                 onChange={this.onChange}
-                name='email'
                 value={email}
-                id='email'
+                name='email'
                 type='email'
+                id='email'
                 className='validate'
               />
               <label htmlFor='email'>Email</label>
@@ -62,18 +62,18 @@ class SignIn extends Component {
             <div className='input-field'>
               <input
                 onChange={this.onChange}
-                name='password'
                 value={password}
-                id='password'
+                name='password'
                 type='password'
+                id='password'
                 className='validate'
               />
               <label htmlFor='password'>Password</label>
             </div>
             <p className='red-text'>{error}</p>
             <button
-              type='submit'
               disabled={isInvalid}
+              type='submit'
               className='waves-effect waves-light btn'
             >Sign in</button>
             <p>

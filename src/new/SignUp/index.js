@@ -59,10 +59,10 @@ class SignUp extends Component {
             <div className='input-field'>
               <input
                 onChange={this.onChange}
-                name='username'
                 value={username}
-                id='username'
+                name='username'
                 type='text'
+                id='username'
                 className='validate'
               />
               <label htmlFor='username'>Name</label>
@@ -70,10 +70,10 @@ class SignUp extends Component {
             <div className='input-field'>
               <input
                 onChange={this.onChange}
-                name='email'
                 value={email}
-                id='email'
+                name='email'
                 type='email'
+                id='email'
                 className='validate'
               />
               <label htmlFor='email'>Email</label>
@@ -81,10 +81,10 @@ class SignUp extends Component {
             <div className='input-field'>
               <input
                 onChange={this.onChange}
-                name='passwordOne'
                 value={passwordOne}
-                id='passwordOne'
+                name='passwordOne'
                 type='password'
+                id='passwordOne'
                 className='validate'
               />
               <label htmlFor='passwordOne'>Password</label>
@@ -92,18 +92,18 @@ class SignUp extends Component {
             <div className='input-field'>
               <input
                 onChange={this.onChange}
-                name='passwordTwo'
                 value={passwordTwo}
-                id='passwordTwo'
+                name='passwordTwo'
                 type='password'
+                id='passwordTwo'
                 className='validate'
               />
               <label htmlFor='passwordTwo'>Re-enter Password</label>
             </div>
             <p className='red-text'>{error}</p>
             <button
-              type='submit'
               disabled={isInvalid}
+              type='submit'
               className='waves-effect waves-light btn'
             >Create an account</button>
             <p>
