@@ -9,55 +9,63 @@ import TasksList from './TasksList'
 import AddTask from './AddTask'
 
 class Tasks extends Component {
-    componentDidMount() {
-        if (this.props.todoUid) {
-            this.onListenerTasks(this.props.todoUid)
-        }
+  componentDidMount() {
+    if (this.props.todoUid) {
+      this.onListenerTasks(this.props.todoUid)
     }
+  }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.todoUid !== prevProps.todoUid) {
-            this.onListenerTasks(this.props.todoUid)
-        }
+  componentDidUpdate(prevProps) {
+    if (this.props.todoUid !== prevProps.todoUid) {
+      this.onListenerTasks(this.props.todoUid)
     }
+  }
 
-    componentWillUnmount() {
-        this.props.firebase.tasks().off();
-    }
+  componentWillUnmount() {
+    this.props.firebase.tasks().off();
+  }
 
-    onListenerTasks = todoUid => {
-        this.props.firebase.tasks()
-          .orderByChild('todo')
-          .equalTo(todoUid)
-          .on('value', snapshot => {
-              this.props.onSetTasks(snapshot.val())
-          })
-    };
+  onListenerTasks = todoUid => {
+    this.props.firebase.tasks()
+      .orderByChild('todo')
+      .equalTo(todoUid)
+      .on('value', snapshot => {
+        this.props.onSetTasks(snapshot.val())
+      })
+  };
 
-    render() {
-        return (
-          <div>
-              <h5>Tasks</h5>
+  render() {
+    return (
+      <div>
+        <h5>Tasks</h5>
+        {
+          this.props.todoUid ?
+            <div>
               <TasksList />
               <AddTask />
-          </div>
-        )
-    }
+            </div> :
+            <p>
+              You need to select or create and select To-Do List
+            </p>
+        }
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = ({ selectedTodo }) => {
-    let { uid: todoUid } = selectedTodo || null;
-    return { todoUid }
+  let { uid: todoUid } = selectedTodo || null;
+  return { todoUid }
 };
 
 const mapDispatchToProps = dispatch => ({
-    onSetTasks: tasks => {
-        let listTasks = Object.keys(tasks || []).map(key => ({
-            ...tasks[key],
-            uid: key
-        }));
-        dispatch(setTasks(listTasks))
-    }
+  onSetTasks: tasks => {
+    let listTasks = Object.keys(tasks || []).map(key => ({
+      ...tasks[key],
+      uid: key
+    }));
+    dispatch(setTasks(listTasks))
+  }
 });
 
 export default compose(
