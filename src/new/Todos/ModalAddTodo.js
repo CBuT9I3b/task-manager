@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom'
 
 import M from 'materialize-css'
 
+import { withTodos } from '../../containers'
+
 class ModalAddTodo extends Component {
   constructor(props) {
     super(props);
@@ -104,4 +106,4 @@ class ModalAddTodo extends Component {
   }
 }
 
-export default ModalAddTodo
+export default withTodos(ModalAddTodo)

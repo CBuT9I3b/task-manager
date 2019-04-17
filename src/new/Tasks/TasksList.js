@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { withTasks } from '../../containers'
+
 import TaskItem from './TaskItem'
 
 const TasksList = ({ tasks, onRemoveTask }) => (
@@ -16,4 +18,4 @@ const TasksList = ({ tasks, onRemoveTask }) => (
   </ul>
 );
 
-export default TasksList
+export default withTasks(TasksList)

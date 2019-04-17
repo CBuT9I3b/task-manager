@@ -1,8 +1,10 @@
 import React from 'react'
 
+import { withTodos } from '../../containers'
+
 import TodoItem from './TodoItem'
 
-const TodosList = ({ todos, selectedTodo, onSelectTodo, onRemoveTodo }) => {
+const TodosList = ({ todos, selectedTodo, onSelectTodo }) => {
   if (todos.length) {
     return todos.map(todo => (
       <TodoItem
@@ -10,7 +12,6 @@ const TodosList = ({ todos, selectedTodo, onSelectTodo, onRemoveTodo }) => {
         todo={todo}
         isActive={selectedTodo.uid === todo.uid}
         onSelectTodo={onSelectTodo}
-        onRemoveTodo={onRemoveTodo}
       />
     ))
   } else {
@@ -22,4 +23,4 @@ const TodosList = ({ todos, selectedTodo, onSelectTodo, onRemoveTodo }) => {
   }
 };
 
-export default TodosList
+export default withTodos(TodosList)
