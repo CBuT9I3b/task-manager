@@ -3,27 +3,14 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import { withFirebase } from '../services'
-import { setTodos, selectTodo } from '../actions'
+import { selectTodo } from '../actions'
 
 const withTodos = Component => {
   class WithTodos extends React.Component {
-    componentDidMount() {
-      this.onListenerTodos(this.props.userUid)
-    }
-
-    componentWillMount() {
-      this.props.firebase.todos().off();
-      this.props.onSetTodos([]);
-      this.props.onSelectTodo({ uid: null })
-    }
-
-    onListenerTodos = userUid => {
-      this.props.firebase.todos()
-        .orderByChild('user')
-        .equalTo(userUid)
-        .on('value', snapshot => (
-          this.props.onSetTodos(snapshot.val())
-        ))
+    onSelectTodo = todo => {
+      if (this.props.selectedTodo !== todo) {
+        this.props.onSelectTodo(todo)
+      }
     };
 
     onCreateTodo = text => {
@@ -45,18 +32,13 @@ const withTodos = Component => {
         })
     };
 
-    onSelectTodo = todo => {
-      if (this.props.selectedTodo !== todo) {
-        this.props.onSelectTodo(todo)
-      }
-    };
-
     render() {
       return <Component
-        {...this.props}
+        todos={this.props.todos}
+        selectedTodo={this.props.selectedTodo}
+        onSelectTodo={this.onSelectTodo}
         onCreateTodo={this.onCreateTodo}
         onRemoveTodo={this.onRemoveTodo}
-        onSelectTodo={this.onSelectTodo}
       />
     }
   }
@@ -68,13 +50,6 @@ const withTodos = Component => {
   };
 
   const mapDispatchToProps = dispatch => ({
-    onSetTodos: todos => {
-      let listTodos = Object.keys(todos || []).map(key => ({
-        ...todos[key],
-        uid: key
-      }));
-      dispatch(setTodos(listTodos))
-    },
     onSelectTodo: todo => dispatch(selectTodo(todo))
   });
 

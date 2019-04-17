@@ -1,28 +1,57 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
-import { withTodos } from '../../containers'
+import { withFirebase } from '../../services'
+import { setTodos } from '../../actions'
 
 import TodosList from './TodosList'
 import ModalAddTodo from './ModalAddTodo'
 
-const Todos = ({
-  todos,
-  selectedTodo,
-  onSelectTodo,
-  onCreateTodo,
-  onRemoveTodo
-}) => (
-  <div>
-    <TodosList
-      todos={todos}
-      selectedTodo={selectedTodo}
-      onSelectTodo={onSelectTodo}
-      onRemoveTodo={onRemoveTodo}
-    />
-    <ModalAddTodo
-      onCreateTodo={onCreateTodo}
-    />
-  </div>
-);
+class Todos extends Component {
+  componentDidMount() {
+    this.onListenerTodos(this.props.userUid)
+  }
 
-export default withTodos(Todos)
+  componentWillUnmount() {
+    this.props.firebase.todos().off()
+  }
+
+  onListenerTodos = userUid => {
+    this.props.firebase.todos()
+      .orderByChild('user')
+      .equalTo(userUid)
+      .on('value', snapshot => (
+        this.props.onSetTodos(snapshot.val())
+      ))
+  };
+
+  render() {
+    return (
+      <div>
+        <TodosList />
+        <ModalAddTodo />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = ({ userState }) => {
+  let { uid: userUid } = userState || null;
+  return { userUid }
+};
+
+const mapDispatchToProps = dispatch => ({
+  onSetTodos: todos => {
+    let listTodos = Object.keys(todos || []).map(key => ({
+      ...todos[key],
+      uid: key
+    }));
+    dispatch(setTodos(listTodos))
+  }
+});
+
+export default compose(
+  withFirebase,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Todos)

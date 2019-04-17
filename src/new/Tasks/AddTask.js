@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { withTasks } from '../../containers'
+
 class AddTask extends Component {
   constructor(props) {
     super(props);
@@ -64,4 +66,4 @@ class AddTask extends Component {
   }
 }
 
-export default AddTask
+export default withTasks(AddTask)

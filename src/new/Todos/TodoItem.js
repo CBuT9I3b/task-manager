@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TodoItem = ({ todo, isActive, onRemoveTodo, onSelectTodo }) => {
+const TodoItem = ({ todo, isActive, onSelectTodo }) => {
   return (
     <li
       onClick={() => onSelectTodo(todo)}
