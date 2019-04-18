@@ -6,7 +6,7 @@ import { withUser } from '../../containers'
 import { SignOut, Todos, UserBar } from '..'
 
 const SideNavNonAuth = () => (
-  <ul id='slide_out' className='sidenav sidenav-fixed indigo accent-1'>
+  <div>
     <li><NavLink
       to='/'
       className='waves-effect waves-teal'
@@ -15,21 +15,23 @@ const SideNavNonAuth = () => (
       to='/sign_in'
       className='waves-effect waves-teal'
     ><i className='material-icons'>account_circle</i>Sign In</NavLink></li>
-  </ul>
+  </div>
 );
 
 const SideNavAuth = () => (
-  <ul id='slide_out' className='sidenav sidenav-fixed indigo accent-1'>
+  <div>
     <UserBar />
     <li><SignOut /></li>
     <li><div className='divider' /></li>
     <li><a href='#!' className='subheader'>To-Do Lists:</a></li>
     <Todos />
-  </ul>
+  </div>
 );
 
 const SideNav = ({ user }) => (
-  user ? <SideNavAuth /> : <SideNavNonAuth/>
+  <ul id='slide_out' className='sidenav sidenav-fixed indigo accent-1'>
+    {user ? <SideNavAuth /> : <SideNavNonAuth/>}
+  </ul>
 );
 
 export default withUser(SideNav)

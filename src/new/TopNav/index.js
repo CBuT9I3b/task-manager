@@ -9,10 +9,14 @@ const TopNav = () => (
           data-target='slide_out'
           className='sidenav-trigger black-text'
         ><i className='material-icons'>menu</i></a>
+        <a
+          href='#!'
+          className='brand-logo center black-text hide-on-med-and-down'
+        >Task Manager</a>
         <ul className='right'>
-          <li><a href='#!' className='black-text'>Link 1</a></li>
-          <li><a href='#!' className='black-text'>Link 2</a></li>
-          <li><a href='#!' className='black-text'>Link 3</a></li>
+          {/*<li><a href='#!' className='black-text'>Link 1</a></li>*/}
+          {/*<li><a href='#!' className='black-text'>Link 2</a></li>*/}
+          {/*<li><a href='#!' className='black-text'>Link 3</a></li>*/}
         </ul>
       </div>
     </nav>
