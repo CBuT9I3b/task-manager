@@ -10,14 +10,14 @@ import AddTask from './AddTask'
 
 class Tasks extends Component {
   componentDidMount() {
-    if (this.props.todoUid) {
-      this.onListenerTasks(this.props.todoUid)
+    if (this.props.selectedTodoUid) {
+      this.onListenerTasks(this.props.selectedTodoUid)
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.todoUid !== prevProps.todoUid) {
-      this.onListenerTasks(this.props.todoUid)
+    if (this.props.selectedTodoUid !== prevProps.selectedTodoUid) {
+      this.onListenerTasks(this.props.selectedTodoUid)
     }
   }
 
@@ -35,11 +35,13 @@ class Tasks extends Component {
   };
 
   render() {
+    let { selectedTodoUid } = this.props;
+
     return (
       <div>
         <h5>Tasks</h5>
         {
-          this.props.todoUid ?
+          selectedTodoUid ?
             <div>
               <TasksList />
               <AddTask />
@@ -53,10 +55,9 @@ class Tasks extends Component {
   }
 }
 
-const mapStateToProps = ({ selectedTodo }) => {
-  let { uid: todoUid } = selectedTodo || null;
-  return { todoUid }
-};
+const mapStateToProps = ({ selectedTodo }) => ({
+  selectedTodoUid: selectedTodo && selectedTodo.uid
+});
 
 const mapDispatchToProps = dispatch => ({
   onSetTasks: tasks => {

@@ -20,11 +20,14 @@ const withTodos = Component => {
       })
     };
 
-    onRemoveTodo = todoUid => {
-      this.props.firebase.todo(todoUid).remove();
+    onRemoveTodo = todo => {
+      if (todo.uid === this.props.selectedTodo.uid) {
+        this.props.onSelectTodo(null)
+      }
+      this.props.firebase.todo(todo.uid).remove();
       let tasksRef = this.props.firebase.tasks();
       tasksRef.orderByChild('todo')
-        .equalTo(todoUid)
+        .equalTo(todo.uid)
         .once('value', snapshot => {
           let updates = {};
           snapshot.forEach(task => updates[task.key] = null);
@@ -43,11 +46,11 @@ const withTodos = Component => {
     }
   }
 
-  const mapStateToProps = ({ userState, todosState, selectedTodo }) => {
-    let { uid: userUid } = userState || null;
-    let todos = todosState.todos || [];
-    return { userUid, todos, selectedTodo }
-  };
+  const mapStateToProps = ({ userState, todosState, selectedTodo }) => ({
+    userUid: userState && userState.uid,
+    todos: todosState.todos,
+    selectedTodo
+  });
 
   const mapDispatchToProps = dispatch => ({
     onSelectTodo: todo => dispatch(selectTodo(todo))

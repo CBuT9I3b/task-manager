@@ -8,13 +8,13 @@ const withTasks = Component => {
   class WithTasks extends React.Component {
     onCreateTask = text => {
       this.props.firebase.tasks().push({
-        todo: this.props.todoUid,
+        todo: this.props.selectedTodoUid,
         text: text
       })
     };
 
-    onRemoveTask = taskUid => {
-      this.props.firebase.task(taskUid).remove()
+    onRemoveTask = task => {
+      this.props.firebase.task(task.uid).remove()
     };
 
     onEditTask = (task, text) => {
@@ -34,11 +34,10 @@ const withTasks = Component => {
     }
   }
 
-  const mapStateToProps = ({ selectedTodo, todosState }) => {
-    let { uid: todoUid } = selectedTodo || null;
-    let tasks = todosState.tasks || [];
-    return { todoUid, tasks }
-  };
+  const mapStateToProps = ({ selectedTodo, todosState }) => ({
+    selectedTodoUid: selectedTodo && selectedTodo.uid,
+    tasks: todosState.tasks
+  });
 
   return compose(
     withFirebase,

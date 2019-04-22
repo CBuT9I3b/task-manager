@@ -10,7 +10,7 @@ const TodosList = ({ todos, selectedTodo, onSelectTodo }) => {
       <TodoItem
         key={todo.uid}
         todo={todo}
-        isActive={selectedTodo.uid === todo.uid}
+        isActive={selectedTodo && selectedTodo.uid === todo.uid}
         onSelectTodo={onSelectTodo}
       />
     ))
