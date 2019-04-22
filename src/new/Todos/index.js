@@ -36,10 +36,9 @@ class Todos extends Component {
   }
 }
 
-const mapStateToProps = ({ userState }) => {
-  let { uid: userUid } = userState || null;
-  return { userUid }
-};
+const mapStateToProps = ({ userState }) => ({
+  userUid: userState && userState.uid
+});
 
 const mapDispatchToProps = dispatch => ({
   onSetTodos: todos => {

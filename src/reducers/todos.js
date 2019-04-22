@@ -1,6 +1,6 @@
 import { SET_TODOS, SELECT_TODO, SET_TASKS } from '../actions'
 
-export const selectTodo = (state = { uid: null }, action) => {
+export const selectTodo = (state = null, action) => {
   switch (action.type) {
     case SELECT_TODO:
       return action.todo;
@@ -9,7 +9,7 @@ export const selectTodo = (state = { uid: null }, action) => {
   }
 };
 
-export const todosReducer = (state = {}, action) => {
+export const todosReducer = (state = { todos: [], tasks: [] }, action) => {
   switch (action.type) {
     case SET_TODOS:
       return {

@@ -2,11 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const withUser = Component => {
-  class WithUser extends React.Component {
-    render() {
-      return <Component {...this.props} />
-    }
-  }
+  const WithUser = ({ user }) => (
+    <Component user={user} />
+  );
 
   const mapStateToProps = ({ userState }) => ({
     user: userState
