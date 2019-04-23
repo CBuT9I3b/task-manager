@@ -5,9 +5,9 @@ const TaskItem = ({ task, onRemoveTask }) => (
     <div>
       {task.text}
       <a
+        onClick={() => onRemoveTask(task)}
         href='#!'
         className='secondary-content'
-        onClick={() => onRemoveTask(task)}
       ><i className='material-icons'>delete</i></a>
     </div>
   </li>

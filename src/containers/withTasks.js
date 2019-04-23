@@ -26,7 +26,7 @@ const withTasks = Component => {
 
     render() {
       return <Component
-        tasks={this.props.tasks}
+        {...this.props}
         onCreateTask={this.onCreateTask}
         onRemoveTask={this.onRemoveTask}
         onEditTask={this.onEditTask}
