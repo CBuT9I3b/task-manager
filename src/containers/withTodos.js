@@ -37,8 +37,7 @@ const withTodos = Component => {
 
     render() {
       return <Component
-        todos={this.props.todos}
-        selectedTodo={this.props.selectedTodo}
+        {...this.props}
         onSelectTodo={this.onSelectTodo}
         onCreateTodo={this.onCreateTodo}
         onRemoveTodo={this.onRemoveTodo}
