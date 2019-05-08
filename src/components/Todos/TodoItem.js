@@ -1,20 +1,17 @@
 import React from 'react'
 
-const TodoItem = ({ todo, isActive, onRemoveTodo, onSelectTodo }) => {
-  let mStyle = isActive ? 'collection-item active' : 'collection-item';
+const TodoItem = ({ todo, isActive, onSelectTodo }) => {
   return (
     <li
-      className={mStyle}
-      onClick={() => onSelectTodo(todo)}
+      className={isActive ? 'indigo darken-4' : undefined}
     >
-      <div>
+      <a
+        onClick={() => onSelectTodo(todo)}
+        href='#!'
+        className={isActive ? 'white-text waves-effect waves-purple' : 'waves-effect waves-purple'}
+      >
         {todo.text}
-        <a
-          href='#!'
-          className='secondary-content'
-          onClick={() => onRemoveTodo(todo.uid)}
-        ><i className='material-icons'>close</i></a>
-      </div>
+      </a>
     </li>
   )
 };
