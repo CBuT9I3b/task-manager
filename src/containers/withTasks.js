@@ -8,18 +8,28 @@ const withTasks = Component => {
   class WithTasks extends React.Component {
     onCreateTask = text => {
       this.props.firebase.tasks().push({
-        todo: this.props.selectedTodoUid,
-        text: text
-      })
+        todo: this.props.selectedTodo.uid,
+        text: text,
+        dateOfCreation: this.props.firebase.serverValue,
+        execution: false
+      }).then(
+        this.props.firebase.todo(this.props.selectedTodo.uid).update({
+          quantityTasks: this.props.selectedTodo.quantityTasks + 1
+        })
+      )
     };
 
     onRemoveTask = task => {
       this.props.firebase.task(task.uid).remove()
+        .then(
+          this.props.firebase.todo(this.props.selectedTodo.uid).update({
+            quantityTasks: this.props.selectedTodo.quantityTasks - 1
+          })
+        )
     };
 
     onEditTask = (task, text) => {
-      this.props.firebase.task(task.uid).set({
-        ...task,
+      this.props.firebase.task(task.uid).update({
         text
       })
     };
@@ -35,7 +45,7 @@ const withTasks = Component => {
   }
 
   const mapStateToProps = ({ selectedTodo, todosState }) => ({
-    selectedTodoUid: selectedTodo && selectedTodo.uid,
+    selectedTodo,
     tasks: todosState.tasks
   });
 

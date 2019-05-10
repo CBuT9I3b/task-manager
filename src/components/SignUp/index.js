@@ -28,7 +28,8 @@ class SignUp extends Component {
       .then(authUser => (
         this.props.firebase.user(authUser.user.uid).set({
           username,
-          email
+          email,
+          dateOfCreation: this.props.firebase.serverValue
         })
       ))
       .then(() => {

@@ -16,3 +16,23 @@ export const setTasks = tasks => ({
   type: SET_TASKS,
   tasks
 });
+
+// thunk functions
+
+export const setTodosAndSelectedTodo = todos => (dispatch, getState) => {
+  let listTodos = [];
+  let selectedTodo = getState().selectedTodo;
+  Object.keys(todos || []).map(key => {
+    let todo = {
+      ...todos[key],
+      uid: key
+    };
+    if (selectedTodo) {
+      if (selectedTodo.uid === key) {
+        dispatch(selectTodo(todo))
+      }
+    }
+    return listTodos.push(todo)
+  });
+  dispatch(setTodos(listTodos))
+};

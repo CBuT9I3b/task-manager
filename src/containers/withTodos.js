@@ -16,7 +16,9 @@ const withTodos = Component => {
     onCreateTodo = text => {
       this.props.firebase.todos().push({
         user: this.props.userUid,
-        text: text
+        text: text,
+        quantityTasks: 0,
+        dateOfCreation: this.props.firebase.serverValue
       })
     };
 

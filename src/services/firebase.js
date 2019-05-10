@@ -7,7 +7,7 @@ import { configFirebase } from '.'
 export class Firebase {
   constructor() {
     firebase.initializeApp(configFirebase);
-    this.serverValue = firebase.database.ServerValue;
+    this.serverValue = firebase.database.ServerValue.TIMESTAMP;
     this.db = firebase.database();
     this.auth = firebase.auth()
   }
