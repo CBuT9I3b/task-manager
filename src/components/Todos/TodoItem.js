@@ -6,7 +6,7 @@ const TodoItem = ({ todo, isActive, onSelectTodo }) => {
       className={isActive ? 'indigo darken-4' : undefined}
     >
       <a
-        onClick={() => onSelectTodo(todo)}
+        onClick={isActive ? undefined : () => onSelectTodo(todo)}
         href='#!'
         className={isActive ? 'white-text waves-effect waves-purple' : 'waves-effect waves-purple'}
       >

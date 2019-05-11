@@ -8,9 +8,7 @@ import { selectTodo } from '../actions'
 const withTodos = Component => {
   class WithTodos extends React.Component {
     onSelectTodo = todo => {
-      if (this.props.selectedTodo !== todo) {
-        this.props.onSelectTodo(todo)
-      }
+      this.props.onSelectTodo(todo)
     };
 
     onCreateTodo = text => {
@@ -23,18 +21,21 @@ const withTodos = Component => {
     };
 
     onRemoveTodo = todo => {
-      if (todo.uid === this.props.selectedTodo.uid) {
-        this.props.onSelectTodo(null)
-      }
-      this.props.firebase.todo(todo.uid).remove();
-      let tasksRef = this.props.firebase.tasks();
-      tasksRef.orderByChild('todo')
-        .equalTo(todo.uid)
-        .once('value', snapshot => {
-          let updates = {};
-          snapshot.forEach(task => updates[task.key] = null);
-          tasksRef.update(updates)
-        })
+      this.props.firebase.todo(todo.uid).remove()
+        .then(() => {
+          if (todo.uid === this.props.selectedTodo.uid) {
+            this.props.onSelectTodo(null)
+          }
+        }).then(() => {
+          let tasksRef = this.props.firebase.tasks();
+          tasksRef.orderByChild('todo')
+            .equalTo(todo.uid)
+            .once('value', snapshot => {
+              let updates = {};
+              snapshot.forEach(task => updates[task.key] = null);
+              tasksRef.update(updates)
+            })
+        });
     };
 
     render() {

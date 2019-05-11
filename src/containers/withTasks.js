@@ -10,8 +10,8 @@ const withTasks = Component => {
       this.props.firebase.tasks().push({
         todo: this.props.selectedTodo.uid,
         text: text,
-        dateOfCreation: this.props.firebase.serverValue,
-        execution: false
+        done: false,
+        dateOfCreation: this.props.firebase.serverValue
       }).then(
         this.props.firebase.todo(this.props.selectedTodo.uid).update({
           quantityTasks: this.props.selectedTodo.quantityTasks + 1
