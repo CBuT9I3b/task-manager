@@ -15,7 +15,7 @@ const SignOut = ({ firebase, dispatch }) => (
         dispatch(resetState())
       }
     }
-    className='waves-effect waves-teal'
+    className='waves-effect waves-red'
   ><i className='material-icons'>exit_to_app</i>Sign Out</NavLink>
 );
 

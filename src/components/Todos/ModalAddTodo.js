@@ -98,7 +98,7 @@ class ModalAddTodo extends Component {
         <a
           href='#!'
           onClick={this.onOpen}
-          className='waves-effect waves-teal'
+          className='waves-effect waves-red'
         ><i className="material-icons">add</i>New List</a>
         {this.renderModal()}
       </li>

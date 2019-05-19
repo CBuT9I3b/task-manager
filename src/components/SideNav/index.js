@@ -9,11 +9,11 @@ const SideNavNonAuth = () => (
   <div>
     <li><NavLink
       to='/'
-      className='waves-effect waves-teal'
+      className='waves-effect waves-red'
     ><i className='material-icons'>home</i>Home</NavLink></li>
     <li><NavLink
       to='/sign_in'
-      className='waves-effect waves-teal'
+      className='waves-effect waves-red'
     ><i className='material-icons'>account_circle</i>Sign In</NavLink></li>
   </div>
 );
@@ -29,7 +29,7 @@ const SideNavAuth = () => (
 );
 
 const SideNav = ({ user }) => (
-  <ul id='slide_out' className='sidenav sidenav-fixed indigo accent-1'>
+  <ul id='slide_out' className='sidenav sidenav-fixed deep-orange accent-1'>
     {user ? <SideNavAuth /> : <SideNavNonAuth/>}
   </ul>
 );
