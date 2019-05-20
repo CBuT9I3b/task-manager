@@ -28,6 +28,12 @@ const withTasks = Component => {
         )
     };
 
+    onExecution = task => {
+      this.props.firebase.task(task.uid).update({
+        done: !task.done
+      })
+    };
+
     onEditTask = (task, text) => {
       this.props.firebase.task(task.uid).update({
         text
@@ -39,6 +45,7 @@ const withTasks = Component => {
         {...this.props}
         onCreateTask={this.onCreateTask}
         onRemoveTask={this.onRemoveTask}
+        onExecution={this.onExecution}
         onEditTask={this.onEditTask}
       />
     }

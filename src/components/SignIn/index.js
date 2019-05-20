@@ -44,7 +44,7 @@ class SignIn extends Component {
 
     return (
       <div className='row'>
-        <div className='col offset-s1 s10 offset-m2 m8 offset-l2 l8'>
+        <div className='col offset-s1 s10 offset-m2 m8 offset-l3 l6'>
           <h5>Sign In</h5>
           <br />
           <form onSubmit={this.onSubmit}>

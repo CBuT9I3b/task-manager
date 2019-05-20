@@ -1,10 +1,20 @@
 import React from 'react'
 
-const TaskItem = ({ task, onRemoveTask }) => (
+const TaskItem = ({ task, onRemoveTask, onExecution }) => (
   <li className='collection-item avatar'>
-    {task.text}
-    <br/>
-    Date of creation: {new Date((task.dateOfCreation)).toLocaleString()}
+    <i
+      onClick={() => onExecution(task)}
+      className={task.done ? 'material-icons circle green' : 'material-icons circle red'}
+      style={{ cursor: 'pointer' }}
+    >
+      {
+        task.done ? 'check' : null
+      }
+    </i>
+    <span className='title'>{task.text}</span>
+    <p>
+      Created: {new Date((task.dateOfCreation)).toLocaleString()}
+    </p>
     <a
       onClick={() => onRemoveTask(task)}
       href='#!'

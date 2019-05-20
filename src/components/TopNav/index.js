@@ -14,10 +14,10 @@ const TopNav = ({ user, selectedTodo, onRemoveTodo }) => (
         ><i className='material-icons'>menu</i></a>
         <a
           href='#!'
-          className='brand-logo center black-text hide-on-med-and-down'
+          className='brand-logo center black-text hide-on-small-only'
         >
           {
-            user && selectedTodo ? selectedTodo.text : 'Task Manager'
+            user && selectedTodo ? selectedTodo.text : 'React Task Manager'
           }
         </a>
         <ul className='right'>
