@@ -6,11 +6,12 @@ import { withFirebase } from '../services'
 
 const withTasks = Component => {
   class WithTasks extends React.Component {
-    onCreateTask = text => {
+    onCreateTask = (text, deadline) => {
       this.props.firebase.tasks().push({
         todo: this.props.selectedTodo.uid,
         text: text,
         done: false,
+        deadline: deadline,
         dateOfCreation: this.props.firebase.serverValue
       }).then(
         this.props.firebase.todo(this.props.selectedTodo.uid).update({
