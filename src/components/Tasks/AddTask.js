@@ -36,8 +36,8 @@ class AddTask extends Component {
     event.preventDefault()
   };
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+  onChangeText = event => {
+    this.setState({ text: event.target.value })
   };
 
   onChangeDate = () => {
@@ -62,7 +62,7 @@ class AddTask extends Component {
             <div className='input-field col s12 m6 l6'>
               <i className='material-icons prefix'>create</i>
               <input
-                onChange={this.onChange}
+                onChange={this.onChangeText}
                 value={text}
                 name='text'
                 id='add_task'

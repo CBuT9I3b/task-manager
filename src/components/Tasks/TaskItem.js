@@ -8,12 +8,16 @@ const TaskItem = ({ task, onRemoveTask, onExecution }) => (
       style={{ cursor: 'pointer' }}
     >
       {
-        task.done ? 'check' : null
+        task.done && 'check'
       }
     </i>
     <span className='title'>{task.text}</span>
     <p>
       Created: {new Date((task.dateOfCreation)).toLocaleString()}
+      <br/>
+      {
+        task.deadline && `Deadline: ${task.deadline}`
+      }
     </p>
     <a
       onClick={() => onRemoveTask(task)}
