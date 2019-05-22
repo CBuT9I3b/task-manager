@@ -14,7 +14,7 @@ const TasksList = ({ tasks, onRemoveTask, onExecution }) => (
           onRemoveTask={onRemoveTask}
           onExecution={onExecution}
         />)) :
-      <li className='collection-item'>No Tasks</li>
+      <li className='collection-item'>This list is empty. Create the first task.</li>
     }
   </ul>
 );

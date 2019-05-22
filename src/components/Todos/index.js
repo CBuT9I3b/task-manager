@@ -28,10 +28,10 @@ class Todos extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <TodosList />
         <ModalAddTodo />
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -39,16 +39,6 @@ class Todos extends Component {
 const mapStateToProps = ({ userState }) => ({
   userUid: userState && userState.uid
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   onSetTodos: todos => {
-//     let listTodos = Object.keys(todos || []).map(key => ({
-//       ...todos[key],
-//       uid: key
-//     }));
-//     dispatch(setTodos(listTodos))
-//   }
-// });
 
 export default compose(
   withFirebase,

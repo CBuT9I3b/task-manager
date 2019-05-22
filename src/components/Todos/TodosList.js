@@ -4,23 +4,19 @@ import { withTodos } from '../../containers'
 
 import TodoItem from './TodoItem'
 
-const TodosList = ({ todos, selectedTodo, onSelectTodo }) => {
-  if (todos.length) {
-    return todos.map(todo => (
+const TodosList = ({ todos, selectedTodo, onSelectTodo }) => (
+  todos.length ?
+    todos.map(todo => (
       <TodoItem
         key={todo.uid}
         todo={todo}
         isActive={selectedTodo && selectedTodo.uid === todo.uid}
         onSelectTodo={onSelectTodo}
       />
-    ))
-  } else {
-    return (
-      <li>
-        <a href='#!' className='subheader'>No To-Do Lists</a>
-      </li>
-    )
-  }
-};
+    )) :
+    <li>
+      <a href='#!' className='subheader'>Create the first list.</a>
+    </li>
+);
 
 export default withTodos(TodosList)

@@ -1,75 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
 
-import { withFirebase } from '../../services'
-import { setTasks } from '../../actions'
+import Tasks from './Tasks'
 
-import TasksList from './TasksList'
-import AddTask from './AddTask'
-
-class Tasks extends Component {
-  componentDidMount() {
-    if (this.props.selectedTodoUid) {
-      this.onListenerTasks(this.props.selectedTodoUid)
+const TasksPage = ({ selectedTodo }) => (
+  <React.Fragment>
+    <h5>Tasks</h5>
+    {
+      selectedTodo ?
+        <Tasks
+          selectedTodoUid={selectedTodo.uid}
+        /> :
+        <p>
+          You need to select or create and select To-Do List.
+        </p>
     }
-  }
+  </React.Fragment>
+);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.selectedTodoUid !== prevProps.selectedTodoUid) {
-      this.onListenerTasks(this.props.selectedTodoUid)
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.firebase.tasks().off();
-  }
-
-  onListenerTasks = todoUid => {
-    this.props.firebase.tasks()
-      .orderByChild('todo')
-      .equalTo(todoUid)
-      .on('value', snapshot => {
-        this.props.onSetTasks(snapshot.val())
-      })
-  };
-
-  render() {
-    let { selectedTodoUid } = this.props;
-
-    return (
-      <div>
-        <h5>Tasks</h5>
-        {
-          selectedTodoUid ?
-            <div>
-              <TasksList />
-              <AddTask />
-            </div> :
-            <p>
-              You need to select or create and select To-Do List
-            </p>
-        }
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = ({ selectedTodo }) => ({
-  selectedTodoUid: selectedTodo && selectedTodo.uid
+const mapDispatchToProps = ({ selectedTodo }) => ({
+  selectedTodo
 });
 
-const mapDispatchToProps = dispatch => ({
-  onSetTasks: tasks => {
-    let listTasks = Object.keys(tasks || []).map(key => ({
-      ...tasks[key],
-      uid: key
-    }));
-    dispatch(setTasks(listTasks))
-  }
-});
-
-export default compose(
-  withFirebase,
-  connect(mapStateToProps, mapDispatchToProps)
-)(Tasks)
+export default connect(mapDispatchToProps)(TasksPage)

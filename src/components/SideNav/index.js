@@ -6,7 +6,7 @@ import { withUser } from '../../containers'
 import { SignOut, Todos, UserBar } from '..'
 
 const SideNavNonAuth = () => (
-  <div>
+  <React.Fragment>
     <li><NavLink
       to='/'
       className='waves-effect waves-red'
@@ -15,17 +15,17 @@ const SideNavNonAuth = () => (
       to='/sign_in'
       className='waves-effect waves-red'
     ><i className='material-icons'>account_circle</i>Sign In</NavLink></li>
-  </div>
+  </React.Fragment>
 );
 
 const SideNavAuth = () => (
-  <div>
+  <React.Fragment>
     <UserBar />
     <li><SignOut /></li>
     <li><div className='divider' /></li>
     <li><a href='#!' className='subheader'>To-Do Lists:</a></li>
     <Todos />
-  </div>
+  </React.Fragment>
 );
 
 const SideNav = ({ user }) => (
