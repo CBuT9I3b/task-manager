@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import { withUser } from '../../containers'
 
@@ -9,9 +9,9 @@ const Main = ({ user }) => (
   <main>
     <div className='container'>
       <Switch>
-        <Route exact path='/' component={user ? Tasks : Landing} />
-        <Route path='/sign_in' component={SignIn} />
-        <Route path='/sign_up' component={SignUp} />
+        <Route exact path='/' render={() => user ? <Tasks /> : <Landing />} />
+        <Route path='/sign_in' render={() => user ? <Redirect to='/' /> : <SignIn />} />
+        <Route path='/sign_up' render={() => user ? <Redirect to='/' /> : <SignUp />} />
       </Switch>
     </div>
   </main>

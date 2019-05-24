@@ -20,7 +20,7 @@ const SideNavNonAuth = () => (
 
 const SideNavAuth = () => (
   <React.Fragment>
-    <UserBar />
+    <li><UserBar /></li>
     <li><SignOut /></li>
     <li><div className='divider' /></li>
     <li><a href='#!' className='subheader'>To-Do Lists:</a></li>
