@@ -8,21 +8,10 @@ import { withTodos } from '../../containers'
 class ModalAddTodo extends Component {
   constructor(props) {
     super(props);
-    this.modalRef = null;
     this.createRoot();
     this.state = {
       text: ''
     }
-  }
-
-  componentDidMount() {
-    M.Modal.init(this.modalRef);
-    this.modal = M.Modal.getInstance(this.modalRef)
-  }
-
-  componentWillUnmount() {
-    document.body.removeChild(this.modalRoot);
-    this.modalRoot = null
   }
 
   createRoot = () => {
@@ -30,7 +19,14 @@ class ModalAddTodo extends Component {
     document.body.appendChild(this.modalRoot)
   };
 
-  getModalRef = modal => { this.modalRef = modal };
+  componentDidMount() {
+    this.modal = M.Modal.init(this._modal)
+  }
+
+  componentWillUnmount() {
+    document.body.removeChild(this.modalRoot);
+    this.modal && this.modal.destroy()
+  }
 
   renderModal = () => {
     let { text } = this.state;
@@ -40,7 +36,7 @@ class ModalAddTodo extends Component {
       this.modalRoot &&
       createPortal(
         <div
-          ref={this.getModalRef}
+          ref={div => { this._modal = div }}
           className='modal'
         >
           <div className='modal-content'>
@@ -73,13 +69,14 @@ class ModalAddTodo extends Component {
     )
   };
 
-  onOpen = () => {
+  onOpen = event => {
+    event.preventDefault();
     this.modal.open()
   };
 
   onClose = event => {
-    this.modal.close();
-    event.preventDefault()
+    event.preventDefault();
+    this.modal.close()
   };
 
   onChangeText = event => {
@@ -87,6 +84,7 @@ class ModalAddTodo extends Component {
   };
 
   onCreateTodo = (event, text) => {
+    event.preventDefault();
     this.props.onCreateTodo(text);
     this.setState({ text: '' });
     this.onClose(event)

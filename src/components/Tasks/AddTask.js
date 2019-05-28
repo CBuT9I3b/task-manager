@@ -7,7 +7,6 @@ import { withTasks } from '../../containers'
 class AddTask extends Component {
   constructor(props) {
     super(props);
-    this.datepickerRef = null;
     this.state = {
       isActive: false,
       text: '',
@@ -17,23 +16,26 @@ class AddTask extends Component {
 
   componentDidUpdate() {
     if (this.state.isActive) {
-      M.Datepicker.init(this.datepickerRef, {
+      this.datepicker = M.Datepicker.init(this._datepicker, {
         format: 'dd.mm.yyyy',
         onClose: this.onChangeDate
-      });
-      this.datepicker = M.Datepicker.getInstance(this.datepickerRef)
+      })
     } else if (this.datepicker) {
       this.datepicker.destroy()
     }
   }
 
+  componentWillUnmount() {
+    this.datepicker && this.datepicker.destroy()
+  }
+
   onToggleActive = event => {
+    event.preventDefault();
     this.setState({
       isActive: !this.state.isActive,
       text: '',
       deadline: null
-    });
-    event.preventDefault()
+    })
   };
 
   onChangeText = event => {
@@ -45,11 +47,10 @@ class AddTask extends Component {
   };
 
   onCreateTask = (event, text, deadline) => {
+    event.preventDefault();
     this.props.onCreateTask(text, deadline);
     this.onToggleActive(event)
   };
-
-  getDatepickerRef = datepicker => { this.datepickerRef = datepicker };
 
   render() {
     let { isActive, text, deadline } = this.state;
@@ -74,7 +75,7 @@ class AddTask extends Component {
             <div className='input-field col s12 m6 l6'>
               <i className='material-icons prefix'>date_range</i>
               <input
-                ref={this.getDatepickerRef}
+                ref={input => { this._datepicker = input }}
                 id='deadline'
                 type='text'
                 className='datepicker'
