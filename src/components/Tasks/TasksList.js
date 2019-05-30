@@ -4,7 +4,7 @@ import { withTasks } from '../../containers'
 
 import TaskItem from './TaskItem'
 
-const TasksList = ({ tasks, onRemoveTask, onExecution }) => (
+const TasksList = ({ tasks, onRemoveTask, onExecution, onEditTask }) => (
   tasks.length ?
     <ul className='collection'>
       {tasks.map(task => (
@@ -13,6 +13,7 @@ const TasksList = ({ tasks, onRemoveTask, onExecution }) => (
           task={task}
           onRemoveTask={onRemoveTask}
           onExecution={onExecution}
+          onEditTask={onEditTask}
         />
       ))}
     </ul> :
