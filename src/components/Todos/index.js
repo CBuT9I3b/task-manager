@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -28,10 +28,10 @@ class Todos extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <TodosList />
         <ModalAddTodo />
-      </React.Fragment>
+      </Fragment>
     );
   }
 }

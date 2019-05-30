@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Tasks from './Tasks'
 
 const TasksPage = ({ selectedTodo }) => (
-  <React.Fragment>
+  <Fragment>
     <h5>Tasks</h5>
     {
       selectedTodo ?
@@ -15,7 +15,7 @@ const TasksPage = ({ selectedTodo }) => (
           You need to select or create and select To-Do List.
         </p>
     }
-  </React.Fragment>
+  </Fragment>
 );
 
 const mapDispatchToProps = ({ selectedTodo }) => ({

@@ -6,16 +6,16 @@ import TaskItem from './TaskItem'
 
 const TasksList = ({ tasks, onRemoveTask, onExecution }) => (
   tasks.length ?
-    tasks.map(task => (
-      <ul className='collection'>
+    <ul className='collection'>
+      {tasks.map(task => (
         <TaskItem
           key={task.uid}
           task={task}
           onRemoveTask={onRemoveTask}
           onExecution={onExecution}
         />
-      </ul>
-    )) :
+      ))}
+    </ul> :
     <p>This list is empty. Create the first task.</p>
 );
 

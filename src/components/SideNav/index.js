@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { withUser } from '../../containers'
@@ -6,7 +6,7 @@ import { withUser } from '../../containers'
 import { SignOut, Todos, UserBar } from '..'
 
 const SideNavNonAuth = () => (
-  <React.Fragment>
+  <Fragment>
     <li><NavLink
       to='/'
       className='waves-effect waves-red'
@@ -15,17 +15,17 @@ const SideNavNonAuth = () => (
       to='/sign_in'
       className='waves-effect waves-red'
     ><i className='material-icons'>account_circle</i>Sign In</NavLink></li>
-  </React.Fragment>
+  </Fragment>
 );
 
 const SideNavAuth = () => (
-  <React.Fragment>
+  <Fragment>
     <li><UserBar /></li>
     <li><SignOut /></li>
     <li><div className='divider' /></li>
     <li><a href='#!' className='subheader'>To-Do Lists:</a></li>
     <Todos />
-  </React.Fragment>
+  </Fragment>
 );
 
 const SideNav = ({ user }) => (

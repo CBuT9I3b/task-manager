@@ -35,9 +35,10 @@ const withTasks = Component => {
       })
     };
 
-    onEditTask = (task, text) => {
+    onEditTask = (task, text, deadline) => {
       this.props.firebase.task(task.uid).update({
-        text
+        text,
+        deadline
       })
     };
 

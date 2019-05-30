@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import { withFirebase } from '../services'
-
 import { setUser } from '../actions'
 
 const withAuthentication = Component => {

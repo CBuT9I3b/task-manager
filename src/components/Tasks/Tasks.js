@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -15,12 +15,13 @@ class Tasks extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.selectedTodoUid !== prevProps.selectedTodoUid) {
+      this.props.firebase.tasks().off();
       this.onListenerTasks(this.props.selectedTodoUid)
     }
   }
 
   componentWillUnmount() {
-    this.props.firebase.tasks().off();
+    this.props.firebase.tasks().off()
   }
 
   onListenerTasks = todoUid => {
@@ -34,10 +35,10 @@ class Tasks extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <TasksList />
         <AddTask />
-      </React.Fragment>
+      </Fragment>
     )
   }
 }
