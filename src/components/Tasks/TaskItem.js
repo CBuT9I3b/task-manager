@@ -30,7 +30,7 @@ class TaskItem extends Component {
 
     return (
       editMode ?
-        <li className='collection-item'>
+        <li className='collection-item grey lighten-3'>
           <TaskEditMode
             task={task}
             onSubmit={this.onEditTask}

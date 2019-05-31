@@ -42,7 +42,6 @@ class TaskEditMode extends Component {
     let { onSubmit, onCancel, task } = this.props;
     let { text, deadline } = this.state;
     let isInvalid = text === '';
-    let classLabel = task ? 'active' : undefined;
 
     return (
       <form onSubmit={event => onSubmit(event, text, deadline)}>
@@ -55,9 +54,8 @@ class TaskEditMode extends Component {
               name='text'
               id='add_task'
               type='text'
-              className='validate'
             />
-            <label htmlFor='add_task' className={classLabel}>Task</label>
+            <label htmlFor='add_task' className={task && 'active'}>Task</label>
           </div>
           <div className='input-field col s12 m6 l6'>
             <i className='material-icons prefix'>date_range</i>
@@ -68,7 +66,7 @@ class TaskEditMode extends Component {
               type='text'
               className='datepicker'
             />
-            <label htmlFor='deadline' className={classLabel}>Deadline</label>
+            <label htmlFor='deadline' className={task && task.deadline && 'active'}>Deadline</label>
           </div>
         </div>
         <button
