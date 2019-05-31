@@ -6,13 +6,9 @@ const TaskInfo = ({ task, onRemoveTask, onExecution, onToggleEditMode }) => (
   <li className='collection-item avatar'>
     <i
       onClick={() => onExecution(task)}
-      className={task.done ? 'material-icons circle green' : 'material-icons circle red'}
+      className={`material-icons circle waves-effect waves-light ${task.done && 'green'}`}
       style={{ cursor: 'pointer' }}
-    >
-      {
-        task.done && 'check'
-      }
-    </i>
+    >done</i>
     <span className='title'>{task.text}</span>
     <p>
       Created: {new Date((task.dateOfCreation)).toLocaleString()}

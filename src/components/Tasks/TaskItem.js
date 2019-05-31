@@ -30,11 +30,13 @@ class TaskItem extends Component {
 
     return (
       editMode ?
-        <TaskEditMode
-          task={task}
-          onSubmit={this.onEditTask}
-          onCancel={this.onToggleEditMode}
-        /> :
+        <li className='collection-item'>
+          <TaskEditMode
+            task={task}
+            onSubmit={this.onEditTask}
+            onCancel={this.onToggleEditMode}
+          />
+        </li> :
         <TaskInfo
           task={task}
           onRemoveTask={onRemoveTask}

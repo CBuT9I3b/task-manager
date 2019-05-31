@@ -8,7 +8,7 @@ const TodoItem = ({ todo, isActive, onSelectTodo }) => {
       <a
         onClick={isActive ? undefined : () => onSelectTodo(todo)}
         href='#!'
-        className={isActive ? 'white-text waves-effect waves-red' : 'waves-effect waves-red'}
+        className={`waves-effect waves-red ${isActive && 'white-text'}`}
       >
         {
           todo.quantityTasks ?
