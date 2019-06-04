@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 
 import TaskInfo from './TaskInfo'
-import TaskEditMode from './TaskEditMode'
+import { Preloader } from '..'
+
+const TaskEditMode = lazy(() => import('./TaskEditMode'));
 
 class TaskItem extends Component {
   constructor(props) {
@@ -31,11 +33,13 @@ class TaskItem extends Component {
     return (
       editMode ?
         <li className='collection-item grey lighten-3'>
-          <TaskEditMode
-            task={task}
-            onSubmit={this.onEditTask}
-            onCancel={this.onToggleEditMode}
-          />
+          <Suspense fallback={<Preloader />}>
+            <TaskEditMode
+              task={task}
+              onSubmit={this.onEditTask}
+              onCancel={this.onToggleEditMode}
+            />
+          </Suspense>
         </li> :
         <TaskInfo
           task={task}

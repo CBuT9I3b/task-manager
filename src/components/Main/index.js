@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 
 import { withUser } from '../../containers'
 
-import { Landing, Tasks, SignIn, SignUp } from '..'
+import { Landing, SignIn, SignUp, Tasks } from '..'
 
 const Main = ({ user }) => (
   <main>

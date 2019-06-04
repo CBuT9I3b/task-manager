@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 
 import { withTasks } from '../../containers'
 
-import TaskEditMode from './TaskEditMode'
+import { Preloader } from '..'
+
+const TaskEditMode = lazy(() => import('./TaskEditMode'));
 
 class AddTask extends Component {
   constructor(props) {
@@ -30,10 +32,12 @@ class AddTask extends Component {
 
     return (
       isActive ?
-        <TaskEditMode
-          onSubmit={this.onCreateTask}
-          onCancel={this.onToggleActive}
-        /> :
+        <Suspense fallback={<Preloader />}>
+          <TaskEditMode
+            onSubmit={this.onCreateTask}
+            onCancel={this.onToggleActive}
+          />
+        </Suspense> :
         <button
           onClick={this.onToggleActive}
           className='btn-flat waves-effect waves-teal'
