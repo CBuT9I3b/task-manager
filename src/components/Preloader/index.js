@@ -3,7 +3,7 @@ import React from 'react'
 const style = {
   display: 'flex',
   justifyContent: 'center',
-  aligtItem: 'center'
+  alignItem: 'center'
 };
 
 const Preloader = () => (
