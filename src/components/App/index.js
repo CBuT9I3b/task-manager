@@ -1,15 +1,14 @@
-import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import React, { Fragment } from 'react'
 
 import { withAuthentication } from '../../containers'
 
 import { Header, Main } from '..'
 
 const App = () => (
-  <BrowserRouter>
+  <Fragment>
     <Header />
     <Main />
-  </BrowserRouter>
+  </Fragment>
 );
 
 export default withAuthentication(App)
