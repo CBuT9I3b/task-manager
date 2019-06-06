@@ -1,25 +1,59 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
-import Tasks from './Tasks'
+import { withFirebase } from '../../services'
+import { setTasks } from '../../actions'
 
-const TasksPage = ({ selectedTodo }) => (
-  <Fragment>
-    <h5>Tasks</h5>
-    {
-      selectedTodo ?
-        <Tasks
-          selectedTodoUid={selectedTodo.uid}
-        /> :
-        <p>
-          You need to select or create and select To-Do List.
-        </p>
+import TasksList from './TasksList'
+import AddTask from './AddTask'
+
+class Tasks extends Component {
+  componentDidMount() {
+    this.onListenerTasks(this.props.selectedTodoUid)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedTodoUid !== prevProps.selectedTodoUid) {
+      this.props.firebase.tasks().off();
+      this.onListenerTasks(this.props.selectedTodoUid)
     }
-  </Fragment>
-);
+  }
 
-const mapDispatchToProps = ({ selectedTodo }) => ({
-  selectedTodo
+  componentWillUnmount() {
+    this.props.firebase.tasks().off()
+  }
+
+  onListenerTasks = todoUid => {
+    this.props.firebase.tasks()
+      .orderByChild('todo')
+      .equalTo(todoUid)
+      .on('value', snapshot => {
+        this.props.onSetTasks(snapshot.val())
+      })
+  };
+
+  render() {
+    return (
+      <Fragment>
+        <TasksList />
+        <AddTask />
+      </Fragment>
+    )
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  onSetTasks: tasks => {
+    let listTasks = Object.keys(tasks || []).map(key => ({
+      ...tasks[key],
+      uid: key
+    }));
+    dispatch(setTasks(listTasks))
+  }
 });
 
-export default connect(mapDispatchToProps)(TasksPage)
+export default compose(
+  withFirebase,
+  connect(null, mapDispatchToProps)
+)(Tasks)

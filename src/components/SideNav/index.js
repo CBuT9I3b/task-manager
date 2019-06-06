@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { withUser } from '../../containers'
+import { withUser } from '../../hocs'
 
 import { SignOut, Todos, UserBar } from '..'
 

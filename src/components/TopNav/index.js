@@ -1,7 +1,7 @@
 import React from 'react'
 import { compose } from 'redux'
 
-import { withUser, withTodos } from '../../containers'
+import { withUser, withTodos } from '../../hocs'
 
 const TopNav = ({ user, selectedTodo, onRemoveTodo }) => (
   <div className='navbar-fixed'>

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
-const Landing = () => (
+const PublicHomePage = () => (
   <Fragment>
     <h5>Home</h5>
     <p>
@@ -11,4 +11,5 @@ const Landing = () => (
   </Fragment>
 );
 
-export default Landing
+export default PublicHomePage
+

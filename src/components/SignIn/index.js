@@ -25,7 +25,7 @@ class SignIn extends Component {
     this.props.firebase.signIn(email, password)
       .then(() => {
         this.setState({...INITIAL_STATE});
-        this.props.history.push('/')
+        this.props.history.push('/manager')
       })
       .catch(error => {
         this.setState({

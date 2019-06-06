@@ -1,6 +1,6 @@
 import React, { Component, lazy, Suspense } from 'react'
 
-import { withTasks } from '../../containers'
+import { withTasks } from '../../hocs'
 
 import { Preloader } from '..'
 

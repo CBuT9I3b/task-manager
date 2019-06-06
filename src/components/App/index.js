@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import { withAuthentication } from '../../containers'
+import { withAuthentication } from '../../hocs'
 
 import { Header, Main } from '..'
 

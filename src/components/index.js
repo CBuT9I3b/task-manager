@@ -1,9 +1,11 @@
 export { default as Preloader } from './Preloader'
 
-export { default as Landing } from './Landing'
+export { default as PublicHomePage } from './PublicHomePage'
 export { default as SignIn } from './SignIn'
 export { default as SignUp } from './SignUp'
+export { default as HomePage } from './HomePage'
 export { default as Tasks } from './Tasks'
+export { default as Routes } from './Routes'
 export { default as Main } from './Main'
 
 export { default as UserBar } from './UserBar'

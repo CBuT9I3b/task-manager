@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { withTasks } from '../../containers'
+import { withTasks } from '../../hocs'
 
 import TaskItem from './TaskItem'
 

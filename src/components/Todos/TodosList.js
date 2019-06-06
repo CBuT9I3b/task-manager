@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { withTodos } from '../../containers'
+import { withTodos } from '../../hocs'
 
 import TodoItem from './TodoItem'
 
