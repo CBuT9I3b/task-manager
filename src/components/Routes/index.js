@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { withUser } from '../../hocs'
 
-import { PublicHomePage, HomePage, SignIn, SignUp } from '..'
+import { PublicHomePage, HomePage, SignInPage, SignUpPage } from '..'
 
 const Routes = ({ user }) => (
   <Switch>
@@ -14,10 +14,10 @@ const Routes = ({ user }) => (
       user ? <HomePage /> : <Redirect to='/' />
     )} />
     <Route path='/sign_in' render={() => (
-      user ? <Redirect to='/' /> : <SignIn />
+      user ? <Redirect to='/' /> : <SignInPage />
     )} />
     <Route path='/sign_up' render={() => (
-      user ? <Redirect to='/' /> : <SignUp />
+      user ? <Redirect to='/' /> : <SignUpPage />
     )} />
   </Switch>
 );

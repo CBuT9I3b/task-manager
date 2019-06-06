@@ -5,12 +5,14 @@ import { compose } from 'redux'
 import { withFirebase } from '../../services'
 
 const INITIAL_STATE = {
+  username: '',
   email: '',
-  password: '',
+  passwordOne: '',
+  passwordTwo: '',
   error: ''
 };
 
-class SignIn extends Component {
+class SignUpPage extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE
@@ -21,33 +23,51 @@ class SignIn extends Component {
   };
 
   onSubmit = event => {
-    let { email, password } = this.state;
-    this.props.firebase.signIn(email, password)
+    let { username, email, passwordOne } = this.state;
+    this.props.firebase.signUp(email, passwordOne)
+      .then(authUser => (
+        this.props.firebase.user(authUser.user.uid).set({
+          username,
+          email,
+          dateOfCreation: this.props.firebase.serverValue
+        })
+      ))
       .then(() => {
         this.setState({...INITIAL_STATE});
         this.props.history.push('/manager')
       })
       .catch(error => {
-        this.setState({
-          password: '',
-          error: error.message
-        })
+        this.setState({error: error.message})
       });
     event.preventDefault()
   };
 
   render() {
-    let { email, password, error } = this.state;
+    let { username, email, passwordOne, passwordTwo, error } = this.state;
     let isInvalid =
+      username === '' ||
       email === '' ||
-      password === '';
+      passwordOne === '' ||
+      passwordTwo === '' ||
+      passwordOne !== passwordTwo;
 
     return (
       <div className='row'>
         <div className='col offset-s1 s10 offset-m2 m8 offset-l3 l6'>
-          <h5>Sign In</h5>
+          <h5>Sign Up</h5>
           <br />
           <form onSubmit={this.onSubmit}>
+            <div className='input-field'>
+              <input
+                onChange={this.onChange}
+                value={username}
+                name='username'
+                type='text'
+                id='username'
+                className='validate'
+              />
+              <label htmlFor='username'>Name</label>
+            </div>
             <div className='input-field'>
               <input
                 onChange={this.onChange}
@@ -62,22 +82,33 @@ class SignIn extends Component {
             <div className='input-field'>
               <input
                 onChange={this.onChange}
-                value={password}
-                name='password'
+                value={passwordOne}
+                name='passwordOne'
                 type='password'
-                id='password'
+                id='passwordOne'
                 className='validate'
               />
-              <label htmlFor='password'>Password</label>
+              <label htmlFor='passwordOne'>Password</label>
+            </div>
+            <div className='input-field'>
+              <input
+                onChange={this.onChange}
+                value={passwordTwo}
+                name='passwordTwo'
+                type='password'
+                id='passwordTwo'
+                className='validate'
+              />
+              <label htmlFor='passwordTwo'>Re-enter Password</label>
             </div>
             <p className='red-text'>{error}</p>
             <button
               disabled={isInvalid}
               type='submit'
               className='waves-effect waves-light btn'
-            >Sign in</button>
+            >Create an account</button>
             <p>
-              Don't have an account? <Link to='/sign_up'>Sign Up</Link>
+              Have an account? <Link to='/sign_in'>Sign In</Link>
             </p>
           </form>
         </div>
@@ -89,4 +120,4 @@ class SignIn extends Component {
 export default compose(
   withFirebase,
   withRouter
-)(SignIn)
+)(SignUpPage)
