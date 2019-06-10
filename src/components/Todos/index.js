@@ -5,11 +5,20 @@ import { compose } from 'redux'
 import { withFirebase } from '../../services'
 import { setTodosAndSelectedTodo } from '../../actions'
 
+import { Preloader } from '..'
 import TodosList from './TodosList'
 import ModalAddTodo from './ModalAddTodo'
 
 class Todos extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false
+    }
+  }
+
   componentDidMount() {
+    this.setState({ loading: true });
     this.onListenerTodos(this.props.userUid)
   }
 
@@ -21,15 +30,18 @@ class Todos extends Component {
     this.props.firebase.todos()
       .orderByChild('user')
       .equalTo(userUid)
-      .on('value', snapshot => (
-        this.props.dispatch(setTodosAndSelectedTodo(snapshot.val()))
-      ))
+      .on('value', snapshot => {
+        this.props.dispatch(setTodosAndSelectedTodo(snapshot.val()));
+        this.setState({ loading: false })
+      })
   };
 
   render() {
+    let { loading } = this.state;
+
     return (
       <Fragment>
-        <TodosList />
+        { loading ? <Preloader /> : <TodosList /> }
         <ModalAddTodo />
       </Fragment>
     );
