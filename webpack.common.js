@@ -9,6 +9,7 @@ module.exports = {
     app: './src/index.js'
   },
   output: {
+    publicPath: '/',
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js',
     path: path.resolve(__dirname, 'build')
@@ -21,8 +22,13 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader']
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.(sass|scss|css)$/,
+        use: [{
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: process.env.NODE_ENV === 'development'
+          }
+        }, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
